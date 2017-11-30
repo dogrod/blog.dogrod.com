@@ -24,4 +24,4 @@ urlpatterns = [
     url(r'^$', blogpostViews.index),
     url(r'blog/(?P<slug>[^\.]+).html', blogpostViews.view_post, name='view_blog_post'),
     url(r'^admin/', include(admin.site.urls)),
-]
+] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
