@@ -1,0 +1,11 @@
+version:  '2'
+services:
+  blog:
+    build: .
+    command: bash -c 'python3 manage.py makemigrations &&
+                      python3 manage.py migrate &&
+                      uwsgi --ini uwsgi.ini'
+    volumes:
+      - .:/home/service
+    ports:
+      - '5901:8000'
