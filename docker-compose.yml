@@ -1,9 +1,9 @@
 version:  '2'
 services:
-  blog:
+  dev:
     build: .
     command: bash -c 'python3 manage.py makemigrations &&
-                      python3 manage.py migrate &&
+                      python3 manage.py migrate --noinput &&
                       uwsgi --ini uwsgi.ini'
     volumes:
       - .:/home/service
