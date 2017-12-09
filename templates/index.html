@@ -1,14 +1,20 @@
 {% extends "base.html" %}
+<!-- {% load static from staticfiles %} -->
+
 
 {% block title %}
-Welcome to my blog
+DogRod
 {% endblock  %}
 
 {% block content %}
-<h1>Posts</h1>
-{% for post in posts %}
-<h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
-<p>{{ post.posted }} - By {{ post.author }}</p>
-<p>{{ post.body }}</p>
-{% endfor %}
+<div class="main">
+  <ul>
+    {% for post in posts %}
+      <li class="index__blog-index">
+        <h3>{{ post.posted }}</h3>
+        <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
 {% endblock  %}
