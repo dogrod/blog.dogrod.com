@@ -4,7 +4,7 @@ from blogpost.models import Blogpost
 # Create your views here.
 def index(request):
   return render_to_response('index.html', {
-    'posts': Blogpost.objects.all()[::-5]
+    'posts': Blogpost.objects.all()[::-1]
   })
 
 def view_post(request, slug):
