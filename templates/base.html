@@ -10,31 +10,33 @@
       {% endblock %}
     </title>
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">    
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">    
     {% block css %}
     {% endblock %}
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Montserrat|Roboto:400,400italic,600|Roboto+Mono">
   </head>
   <body>
-    <div class="header">
-      <div class="links">
-        <a href="https://github.com/dogrod" target="_blank">
-          <img src="{% static 'images/github.png' %}" alt="github">
-        </a>
-        <a href="http://www.jianshu.com/u/18d0a05c3169" target="_blank">
-          <img src="{% static 'images/jianshu.png' %}" alt="jianshu">
-        </a>
+    <div class="wrapper">
+      <div class="header">
+        <div class="links">
+          <a href="https://github.com/dogrod" target="_blank">
+            <img src="{% static 'images/github.png' %}" alt="github">
+          </a>
+          <a href="http://www.jianshu.com/u/18d0a05c3169" target="_blank">
+            <img src="{% static 'images/jianshu.png' %}" alt="jianshu">
+          </a>
+        </div>
+        <div class="title">
+          <a href="/">DOG ROD</a>
+        </div>
+        <div class="motto">
+          <h6>What if everything you're going through right now is preparing you for a dream bigger than you can imagine.</h6>
+        </div>
       </div>
-      <div class="title">
-        <a href="/">DOG ROD</a>
+      <div class="content">
+        {% block content %}
+        {% endblock %}
       </div>
-      <div class="motto">
-        <h6>What if everything you're going through right now is preparing you for a dream bigger than you can imagine.</h6>
-      </div>
-    </div>
-    <div class="content">
-      {% block content %}
-      {% endblock %}
     </div>
   </body>
 </html>

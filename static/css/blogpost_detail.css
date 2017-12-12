@@ -9,6 +9,9 @@
 .blogpost-detail__title {
   font-size: 22px;
   letter-spacing: 1px;
+  font-family: "Montserrat", "Helvetica Neue", "Hiragino Sans GB", "LiHei Pro", Arial, sans-serif;
+  font-weight: 400;
+  color: #1C3754;
 }
 .blogpost-detail__info {
   margin: 20px 0 10px;
