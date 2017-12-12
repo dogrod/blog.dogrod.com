@@ -1,7 +1,13 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 
+# Custom QuerySet manager
+class PublishedManager(models.Manager):
+  def get_queryset(self):
+    return super(PublishedManager, self).get_queryset()\
+                                        .filter(status='published')
 # Create your models here.
 class Post(models.Model):
   STATUS_CHOICES = (
@@ -23,3 +29,16 @@ class Post(models.Model):
 
   def __str__(self):
     return self.title
+
+  def get_absolute_url(self):
+    return reverse('post:post_detail',
+      args=[
+        self.publish.year,
+        self.publish.strftime('%m'),
+        self.publish.strftime('%d'),
+        self.slug
+      ]
+    )
+
+  objects = models.Manager() # default QS manager
+  published = PublishedManager() # custom QS manager

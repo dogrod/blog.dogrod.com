@@ -18,10 +18,8 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from blogpost import views as blogpostViews
 
 urlpatterns = [
-    url(r'^$', blogpostViews.index),
-    url(r'post/(?P<slug>[^\.]+).html', blogpostViews.view_post, name='view_blog_post'),
+    url(r'^', include('post.urls', namespace='post', app_name='post')),
     url(r'^admin/', include(admin.site.urls)),
 ] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
