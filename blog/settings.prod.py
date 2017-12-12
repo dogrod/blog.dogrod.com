@@ -23,9 +23,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'lot^$c)7d$%kk1zo3c%gi#p5nnitjcx_mskwocjefy=(vyfut2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '.dogrod.com',
+    '.dogrod.xyz',
+    '106.14.166.222',
+    '127.0.0.1',
+    'localhost',
+]
 
 
 # Application definition
@@ -38,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blogpost',
-    'post',
 ]
 
 MIDDLEWARE = [
