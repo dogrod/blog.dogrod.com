@@ -14,7 +14,7 @@ DogRod
   <ul class='index__blog-list'>
     {% for post in posts %}
     <li class="index__blog-index">
-      <span class="index__blog-post-time">{{ post.publish }}</span>
+      <span class="index__blog-post-time">{{ post.get_publish_date }}</span>
       <span class="index__blog-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></span>
     </li>
     {% endfor %}

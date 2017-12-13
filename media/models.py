@@ -48,7 +48,7 @@ class UpYunStorage(Storage):
     return urljoin(self.BASE_URL, filepath_to_uri(name))
 
 # Create your models here.
-class UpYunUpload(models.Model):
+class UpyunMedia(models.Model):
   name = models.CharField(max_length = 40, blank = True, verbose_name = u'file_name')
   url = models.FileField(upload_to = 'media', storage = UpYunStorage(), verbose_name = u'URL')
   create_at = models.DateTimeField(auto_now_add = True)

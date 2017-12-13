@@ -19,13 +19,13 @@ class Post(models.Model):
   slug = models.SlugField(max_length = 100)
   author = models.ForeignKey(User, related_name = 'blog_posts')
   body = models.TextField()
-  publish = models.DateTimeField(default = timezone.now)
-  created = models.DateTimeField(auto_now_add = True)
-  updated = models.DateTimeField(auto_now = True)
+  publish_at = models.DateTimeField(default = timezone.now)
+  create_at = models.DateTimeField(auto_now_add = True)
+  update_at = models.DateTimeField(auto_now = True)
   status = models.CharField(max_length = 10, choices = STATUS_CHOICES, default = 'draft')
 
   class Meta:
-    ordering = ('-publish',)
+    ordering = ('-publish_at',)
 
   def __str__(self):
     return self.title
@@ -33,12 +33,15 @@ class Post(models.Model):
   def get_absolute_url(self):
     return reverse('post:post_detail',
       args=[
-        self.publish.year,
-        self.publish.strftime('%m'),
-        self.publish.strftime('%d'),
+        self.publish_at.year,
+        self.publish_at.strftime('%m'),
+        self.publish_at.strftime('%d'),
         self.slug
       ]
     )
+
+  def get_publish_date(self):
+    return self.publish_at.date()
 
   objects = models.Manager() # default QS manager
   published = PublishedManager() # custom QS manager
