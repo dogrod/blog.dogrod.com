@@ -14,7 +14,7 @@ class UpYunStorage(Storage):
   BUCKET_NAME = os.environ.get('UPYUN_BUCKET_NAME') or 'dogrod-media-test'
   USERNAME = os.environ.get('UPYUN_USERNAME') or 'dogrodtest'
   PASSWORD = os.environ.get('UPYUN_PASSWORD') or '123456abc'
-  BASE_URL = os.environ.get('UPYUN_BASE_URL') or 'http://static.dogrod.xyz/'
+  BASE_URL = os.environ.get('UPYUN_BASE_URL') or '//static.dogrod.xyz/'
 
   up = upyun.UpYun(BUCKET_NAME, USERNAME, PASSWORD, timeout = 30, endpoint = upyun.ED_AUTO)
 
@@ -45,7 +45,7 @@ class UpYunStorage(Storage):
     return 0
 
   def url(self, name):
-    return urljoin(self.BASE_URL, filepath_to_uri(name))
+    return filepath_to_uri(name)
 
 # Create your models here.
 class UpyunMedia(models.Model):
