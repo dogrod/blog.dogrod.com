@@ -14,7 +14,7 @@ class UpYunStorage(Storage):
   BUCKET_NAME = os.environ.get('UPYUN_BUCKET_NAME') or 'dogrod-media-test'
   USERNAME = os.environ.get('UPYUN_USERNAME') or 'dogrodtest'
   PASSWORD = os.environ.get('UPYUN_PASSWORD') or '123456abc'
-  BASE_URL = os.environ.get('UPYUN_BASE_URL') or 'http://dogrod-media-test.test.upcdn.net/'
+  BASE_URL = os.environ.get('UPYUN_BASE_URL') or 'http://static.dogrod.xyz/'
 
   up = upyun.UpYun(BUCKET_NAME, USERNAME, PASSWORD, timeout = 30, endpoint = upyun.ED_AUTO)
 
