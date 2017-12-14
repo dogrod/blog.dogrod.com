@@ -5,19 +5,15 @@
 <link rel="stylesheet" href="{% static 'css/blogpost_detail.css' %}">    
 {% endblock %}
 
-{% block head_title %}
-{{ post.title }}
-{% endblock  %}
-
 {% block title %}
-{{ post.title }}
+{{ post.title }} | DogRod
 {% endblock  %}
 
 {% block content %}
 <!-- <a href="/">返回首页</a> -->
 <div class="blogpost-detail">
   <div class="blogpost-detail__title">{{ post.title }}</div>
-  <div class="blogpost-detail__info">{{ post.created }} - By {{ post.author }} </div>
+  <div class="blogpost-detail__info">{{ post.create_at }} - By {{ post.author }} </div>
   <p>{{ post.body }}</p>
 </div>
 {% endblock  %}

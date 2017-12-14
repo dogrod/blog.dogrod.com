@@ -2,15 +2,15 @@
 
 {% block filters %}
 <div>
-    <h6>文件上传:</h6>
+    <h4>Upload file:</h4>
     <form enctype="multipart/form-data" action="add/" method="post" id="staticfile_form">
             {% csrf_token %}
-            <label for="id_name">名称:</label>
+            <label for="id_name">File name:</label>
             <input class="vTextField" id="id_name" maxlength="40" name="name" type="text" />
             <label for="id_url" class="required">URL:</label>
 
             <input id="id_url" name="url" type="file" />
-            <input type="submit" value="保存" name="_save" />
+            <input type="submit" value="Save" name="_save" />
     </form>
 </div>
 <br/>
