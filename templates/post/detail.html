@@ -2,7 +2,7 @@
 {% load static from staticfiles %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/blogpost_detail.css' %}">    
+<link rel="stylesheet" href="{% static 'css/post/detail.css' %}">    
 {% endblock %}
 
 {% block title %}
@@ -11,9 +11,9 @@
 
 {% block content %}
 <!-- <a href="/">返回首页</a> -->
-<div class="blogpost-detail">
-  <div class="blogpost-detail__title">{{ post.title }}</div>
-  <div class="blogpost-detail__info">{{ post.create_at }} - By {{ post.author }} </div>
+<div class="post-detail">
+  <div class="post__title">{{ post.title }}</div>
+  <div class="post__info">{{ post.create_at }} - By {{ post.author }} </div>
   <p>{{ post.body }}</p>
 </div>
 {% endblock  %}

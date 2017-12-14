@@ -2,7 +2,7 @@
 {% load static from staticfiles %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/index.css' %}">    
+<link rel="stylesheet" href="{% static 'css/post/list.css' %}">    
 {% endblock %}
   
 {% block title %}
@@ -14,8 +14,8 @@ Blog | DogRod
   <ul class='index__blog-list'>
     {% for post in posts %}
     <li class="index__blog-index">
-      <span class="index__blog-post-time">{{ post.get_publish_date }}</span>
-      <span class="index__blog-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></span>
+      <span class="post__info">{{ post.get_publish_date }}</span>
+      <span class="post__title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></span>
     </li>
     {% endfor %}
   </ul>

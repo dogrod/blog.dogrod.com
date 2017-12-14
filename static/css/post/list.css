@@ -14,15 +14,3 @@
   padding: 30px 0 30px;
   /* border-bottom: 1px solid #e6e6e6; */
 }
-.index__blog-post-time {
-  font-size: 13px;
-  color: #999;
-}
-.index__blog-title {
-  font-size: 20px;
-  letter-spacing: 1px;
-  margin-left: 20px;
-}
-.index__blog-title :hover {
-  color: #f33;
-}
