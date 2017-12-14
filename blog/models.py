@@ -32,7 +32,7 @@ class Post(models.Model):
 
   def get_absolute_url(self):
     return reverse('post:post_detail',
-      args=[
+      args = [
         self.publish_at.year,
         self.publish_at.strftime('%m'),
         self.publish_at.strftime('%d'),
@@ -45,3 +45,19 @@ class Post(models.Model):
 
   objects = models.Manager() # default QS manager
   published = PublishedManager() # custom QS manager
+
+
+class Comment(models.Model):
+  post = models.ForeignKey(Post, related_name = 'comments')
+  name = models.CharField(max_length = 80)
+  email = models.EmailField()
+  body = models.TextField()
+  create_at = models.DateTimeField(auto_now_add = True)
+  update_at = models.DateTimeField(auto_now = True)
+  active = models.BooleanField(default = True)
+
+  class Meta:
+    ordering = ('create_at',)
+
+  def __str__(self):
+    return 'Comment by {} on {}'.format(self.name, self.post)
