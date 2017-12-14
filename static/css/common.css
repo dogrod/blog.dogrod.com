@@ -4,10 +4,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 20px;
   word-spacing: 1px;
   color: #1C3754;
-  background-color: #FEFBFB;  
+  background-color: #FFFFFF;  
   margin: 0;
 }
 img {
@@ -23,28 +23,46 @@ a {
   font-weight: 400;
   color: #1C3754;
 }
+h1 {
+  font-size: 36px;
+}
+h2 {
+  font-size: 28px;
+}
 h6 {
   padding: 0;
   text-align: center;
   margin-bottom: 15px;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 21px;
   font-family: "lexia", Helvetica, Arial, sans-serif;
   font-weight: 400;
 }
-.wrapper {
+.header,
+.post-content,
+.post-comments {
   width: 100%;
   max-width: 690px;
-  margin: 0 auto;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  /* max-width: 690px; */
+  /* margin: 0 auto; */
 }
 .header {
   height: auto;
   margin: 0 auto;
   text-align: center;
   padding: 0 0 80px 0;
+  border-bottom: 1px dotted #1c3754;
 }
 .title {
-  font-size: 24px;
+  font-size: 32px;
   letter-spacing: 5px;
   margin: 50px auto 15px;
   text-align: center;
@@ -54,7 +72,7 @@ h6 {
   font-size: 1.0rem;
   line-height: 1.2;
   width: 100%;
-  max-width: 350px;
+  max-width: 400px;
   margin: 10px auto 0;
 }
 .links {
@@ -67,12 +85,11 @@ h6 {
   letter-spacing: 10px;
 }
 .content {
-  margin: 0 20px 50px;
+  width: 100%;
   padding-top: 30px;
-  border-top: 1px dotted #1c3754;
 }
 .post__title {
-  font-size: 20px;
+  font-size: 28px;
   letter-spacing: 1px;
   margin-left: 20px;
   font-family: "Montserrat", "Helvetica Neue", "Hiragino Sans GB", "LiHei Pro", Arial, sans-serif;
@@ -88,4 +105,39 @@ h6 {
 .pagination {
   margin-top: 80px;
   text-align: center;
+}
+.post-comments__wrapper {
+  display: flex;
+  justify-content: center;
+  
+  width: 100%;
+  background: #FAFAFA;
+}
+.post-comments {
+  padding: 30px;  
+}
+.post-comment__time {
+  font-size: 16px;
+  color: #999;
+}
+.post-comment,
+.post-comment__form {
+  margin-top: 20px;
+  padding: 10px 20px 15px;
+}
+.post-comment,
+.post-comment__form {
+  background: #FFFFFF;
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  border: 1px solid rgba(0,0,0,.09);
+}
+.post-comment__form input,
+.post-comment__form textarea {
+  font-size: 20px;
+}
+.post-comment__form input:not([type='submit']),
+.post-comment__form textarea {
+  border: none;
+  background: #FAFAFA;
+  outline: none;
 }
