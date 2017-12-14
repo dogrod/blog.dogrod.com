@@ -26,11 +26,10 @@
       {% endwith %}
       {% for comment in comments %}
         <div class="post-comment">
-          <p class="post-comment__commenter">
-            {{ comment.name }}
-          </p>
-          <p class="post-comment__time">
-            {{ comment.create_at }}
+          <p class="post-comment__info">
+            <span class="post-comment__commenter">{{ comment.name }}</span>
+            ·
+            <span class="post-comment__time">{{ comment.create_at }}</span>
           </p>
           <p>
             {{ comment.body | linebreaks }}

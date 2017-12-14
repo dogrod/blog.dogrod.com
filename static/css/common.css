@@ -40,8 +40,7 @@ h6 {
   font-weight: 400;
 }
 .header,
-.post-content,
-.post-comments {
+.post-content {
   width: 100%;
   max-width: 690px;
 }
@@ -52,8 +51,6 @@ h6 {
   align-items: center;
 
   width: 100%;
-  /* max-width: 690px; */
-  /* margin: 0 auto; */
 }
 .header {
   height: auto;
@@ -129,39 +126,4 @@ h6 {
 }
 .pagination__next {
   right: 10px;
-}
-.post-comments__wrapper {
-  display: flex;
-  justify-content: center;
-  
-  width: 100%;
-  background: #FAFAFA;
-}
-.post-comments {
-  padding: 30px;  
-}
-.post-comment__time {
-  font-size: 16px;
-  color: #999;
-}
-.post-comment,
-.post-comment__form {
-  margin-top: 20px;
-  padding: 10px 20px 15px;
-}
-.post-comment,
-.post-comment__form {
-  background: #FFFFFF;
-  box-shadow: 0 1px 4px rgba(0,0,0,.04);
-  border: 1px solid rgba(0,0,0,.09);
-}
-.post-comment__form input,
-.post-comment__form textarea {
-  font-size: 20px;
-}
-.post-comment__form input:not([type='submit']),
-.post-comment__form textarea {
-  border: none;
-  background: #FAFAFA;
-  outline: none;
 }
