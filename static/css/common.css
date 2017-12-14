@@ -70,11 +70,13 @@ h6 {
 }
 .motto {
   color: #1C3754;
-  font-size: 1.0rem;
   line-height: 1.2;
   width: 100%;
-  max-width: 400px;
+  max-width: 440px;
   margin: 10px auto 0;
+}
+.motto h6 {
+  padding: 0 30px;
 }
 .links {
   margin: 0;
@@ -109,6 +111,7 @@ h6 {
   justify-content: center;
   margin-top: 80px;
   text-align: center;
+  font-size: 18px;
 }
 .pagination__prev,
 .pagination__next {
