@@ -96,15 +96,35 @@ h6 {
   font-weight: 400;
 }
 .post__title a:hover {
-  color: #e54973;
+  color: #E54973;
 }
 .post__info {
   font-size: 13px;
   color: #999;
 }
 .pagination {
+  position: relative;
+  display: flex;
+  justify-content: center;
   margin-top: 80px;
   text-align: center;
+}
+.pagination__prev,
+.pagination__next {
+  position: absolute;
+  color: #E54973;
+  border-bottom: 1px dashed transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.pagination__prev:hover,
+.pagination__next:hover {
+  border-color: #E54973;
+}
+.pagination__prev {
+  left: 10px;
+}
+.pagination__next {
+  right: 10px;
 }
 .post-comments__wrapper {
   display: flex;
