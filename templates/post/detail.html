@@ -10,10 +10,39 @@
 {% endblock  %}
 
 {% block content %}
-<!-- <a href="/">返回首页</a> -->
-<div class="post-detail">
-  <div class="post__title">{{ post.title }}</div>
-  <div class="post__info">{{ post.create_at }} - By {{ post.author }} </div>
-  <p>{{ post.body }}</p>
-</div>
+  <!-- <a href="/">返回首页</a> -->
+  <div class="post-content">
+    <div class="post__title">{{ post.title }}</div>
+    <div class="post__info">{{ post.create_at }} - By {{ post.author }} </div>
+    <p>{{ post.body | linebreaks }}</p>
+  </div>
+  <div class="post-comments">
+    {% with comments.count as total_comments %}
+    <h2>
+      {{ total_comments }}
+      comment{{ total_comments | pluralize }}
+    </h2>
+    {% endwith %}
+    {% for comment in comments %}
+      <div class="post-comment">
+        <p class="post-comment__info">
+          Comment {{ forloop.counter }} by {{ comment.name }}
+          {{ comment.create_at }}
+        </p>
+        {{ comment.body | linebreaks }}
+      </div>
+      {% empty %}
+        <p>There are no comments yet.</p>
+    {% endfor %}
+    {% if new_comment %}
+      <h2>Your comment has been added.</h2>
+    {% else %}
+      <h2>Add a new comment</h2>
+      <form action="." method="post">
+        {{ comment_form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="Add comment"></p>
+      </form>
+    {% endif %}
+  </div>
 {% endblock  %}
