@@ -8,5 +8,5 @@ urlpatterns = [
   url(r'^post/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/'\
       r'(?P<slug>[-\w]+)/$',
       views.post_detail,
-      name='post_detail'),
+      name = 'post_detail'),
 ]
