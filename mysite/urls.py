@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^', include('blog.urls', namespace='post', app_name='post')),
-    url(r'^admin/', include(admin.site.urls))
+    url(r'^', include('blog.urls', namespace = 'post', app_name = 'post')),
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^api/', include('blog.api.urls', namespace = 'blog_api'))
 ] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
