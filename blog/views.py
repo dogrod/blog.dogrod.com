@@ -60,6 +60,7 @@ def post_detail(request, year, month, day, slug):
   else:
     comment_form = CommentForm()
 
+  print(post.id)
   return render(request, 'post/detail.html', {
     'post': post,
     'comments': comments,

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'blog',
     'media',
     'taggit',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -128,6 +129,8 @@ STATICFILES_DIRS = (
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'dist/static/')
 
-MEDIA_URL = '/upload/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'upload').replace('\\', '/')
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
