@@ -99,7 +99,7 @@ h6 {
   color: #E54973;
 }
 .post__info {
-  font-size: 13px;
+  font-size: 16px;
   color: #999;
 }
 .pagination {
@@ -126,4 +126,16 @@ h6 {
 }
 .pagination__next {
   right: 10px;
+}
+.post__tags {
+  font-size: 14px;
+  color: #999;
+  letter-spacing: 1px;
+}
+.post__tags a {
+  color: #999;
+  border-bottom: 1px dashed transparent;
+}
+.post__tags a:hover {
+  border-color: #999;
 }

@@ -54,3 +54,6 @@
 .post-comment__form textarea {
   width: 100%;
 }
+.post-comment__form .errorlist {
+  color: #f44;
+}
