@@ -14,8 +14,11 @@ Blog | DogRod
   <ul class='index__blog-list'>
     {% for post in posts %}
     <li class="index__blog-index">
-      <span class="post__info">{{ post.get_publish_date }}</span>
-      <span class="post__title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></span>
+      <div class="post__main-info">
+        <span class="post__info">{{ post.get_publish_date }}</span>
+        <span class="post__title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></span>
+      </div>
+      <div class="post__tags">Tags: {{ post.tags.all | join:"," }}</div>
     </li>
     {% endfor %}
   </ul>

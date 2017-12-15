@@ -51,3 +51,6 @@
   background: #FAFAFA;
   outline: none;
 }
+.post-comment__form textarea {
+  width: 100%;
+}
