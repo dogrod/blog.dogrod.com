@@ -8,7 +8,7 @@ urlpatterns = [
     name = 'post_list'
   ),
   url(
-    r'^posts/(?P<pk>\d+)/$',
+    r'^post/(?P<pk>\d+)/$',
     views.PostDetailView.as_view(),
     name = 'post_detail'
   )
