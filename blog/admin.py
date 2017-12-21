@@ -1,8 +1,18 @@
 from django.contrib import admin
+from django import forms
+from pagedown.widgets import AdminPagedownWidget
 from .models import Post, Comment
 
 # Register your models here.
+class PostForm(forms.ModelForm):
+  body = forms.CharField(widget = AdminPagedownWidget())
+
+  class Meta:
+    model = Post
+    fields = '__all__'
+
 class PostAdmin(admin.ModelAdmin):
+  form = PostForm
   # config which item can show in the list
   list_display = ('title', 'slug', 'author', 'publish_at', 'status')
   # filter config
