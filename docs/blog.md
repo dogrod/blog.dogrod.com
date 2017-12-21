@@ -30,21 +30,21 @@
 
 **请求参数列表：**
 
-name | meaning | type | remark
+Property | Description | Type | Remark
 ---- | --- | --- | ---
-page | 页码 | number |
+page | 页码 | number | -
 
 **响应参数列表：**
 
-name | meaning | type | remark
+Property | Description | Type | Remark
 ---- | --- | --- | ---
-    | 根数组 | array |
-- id | post ID | number |
-- title | 标题 | string |
-- slug | slug | string |
-- author | 作者 | string |
-- publish_at | 发布时间 | date |
-- tags | 标签 | string |
+    | 根数组 | array | -
+- id | post ID | number | -
+- title | 标题 | string | -
+- slug | slug | string | -
+- author | 作者 | string | -
+- publish_at | 发布时间 | date | -
+- tags | 标签 | string | -
 
 **2. 获取Post详情**
 
@@ -56,29 +56,43 @@ name | meaning | type | remark
 
 **响应参数列表：**
 
-name | meaning | type | remark
+Property | Description | Type | Remark
 ---- | --- | --- | ---
-id | post ID | number |
-title | 标题 | string |
-slug | slug | string |
-author | 作者 | string |
-publish_at | 发布时间 | date |
-comments | 评论（暂不开放） | array |
-- name | 评论人 | string | 
-- create_at | 发表时间 | date | 
-- body | 评论内容 | string | 
+id | post ID | number | -
+title | 标题 | string | -
+slug | slug | string | -
+author | 作者 | string | -
+publish_at | 发布时间 | date | -
+comments | 评论（暂不开放） | array | -
+- name | 评论人 | string | -
+- create_at | 发表时间 | date | - 
+- body | 评论内容 | string | -
 tags | 标签 | string | 以英文逗号(,)分割
 
 ## Models
 
 #### Post
 
-文档正在完善...
-
-Docs are under construction...
+Property | Type | Description | Unique | Default | Migrations | Remark
+--- | ---  | ---    | ---     | ---        | --- |
+title | CharField | 标题 | no | - | - | -
+slug | SlugField | slug | no | - | - | -
+author | ForeignKey(User) | 作者 | no | - | - | -
+body | TextField | 内容 | no | - | - | -
+publish_at | DateTimeField | 发布时间 | no | - | - | -
+create_at | DateTimeField | 创建时间 | no | - | - | -
+update_at | DateTimeField | 更新时间 | no | - | - | -
+status | CharField | 发布状态 | no | draft | - | - 
+tags | TaggableManager | tag | no | - | - | 通过django-taggit创建
 
 #### Comment
 
-文档正在完善...
-
-Docs are under construction...
+Property | Type | Description | Unique | Default | Migrations | Remark
+--- | ---  | ---    | ---     | ---        | --- |
+post | ForeignKey(Post) | 关联post | no | - | - | -
+name | CharField | 评论人 | no | - | - | -
+email | EmailField | email | no | - | - | -
+body | TextField | 评论内容 | no | - | - | -
+create_at | DateTimeField | 创建时间 | no | - | - | -
+update_at | DateTimeField | 更新时间 | no | - | - | -
+active | BooleanField | 是否可见 | no | True | - | -
