@@ -135,7 +135,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'dist/static/')
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 20
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
