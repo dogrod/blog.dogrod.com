@@ -33,16 +33,23 @@
 Property | Description | Type | Remark
 ---- | --- | --- | ---
 page | 页码 | number | -
+pageSize | 每页内容数量 | number | -
 
 **响应参数列表：**
 
 Property | Description | Type | Remark
 ---- | --- | --- | ---
-    | 根数组 | array | -
+total | post总数 | number | - 
+pageNumber | 当前页码 | number | - 
+pageSize | 每页post数量 | number | - 
+pageCount | 总页数 | number | - 
+results | Post数组 | array | -
 - id | post ID | number | -
 - title | 标题 | string | -
 - slug | slug | string | -
-- author | 作者 | string | -
+- author | 作者 | object | -
+-- username | 用户名 | string | -
+-- email | 邮箱 | string | -
 - publish_at | 发布时间 | date | -
 - tags | 标签 | string | -
 
@@ -61,7 +68,9 @@ Property | Description | Type | Remark
 id | post ID | number | -
 title | 标题 | string | -
 slug | slug | string | -
-author | 作者 | string | -
+author | 作者 | object | -
+- username | 用户名 | string | -
+- email | 邮箱 | string | -
 publish_at | 发布时间 | date | -
 comments | 评论（暂不开放） | array | -
 - name | 评论人 | string | -

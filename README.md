@@ -8,6 +8,6 @@
 * CDN Support (via UpYun)
 
 ## To-Do
-- [ ] REST API output
+- [x] REST API output
 - [ ] Frontend & Backend Seperation
 - [ ] User system
