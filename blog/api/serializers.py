@@ -25,7 +25,7 @@ class StringListField(serializers.ListField):
   child = serializers.CharField()
 
   def to_representation(self, data):
-    return ' '.join(data.values_list('name', flat=True)) # you change the representation style here.
+    return data.values('name', 'slug') # you change the representation style here.
 
 class PostSerializer(serializers.ModelSerializer):
   """

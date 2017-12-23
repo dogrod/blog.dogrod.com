@@ -37,13 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'taggit',
     'pagedown',
+    'corsheaders',
+    'rest_framework',
+    'rest_framework_jwt',
+    # Custom apps
     'blog',
     'media',
-    'taggit',
-    'rest_framework',
-    'corsheaders',
-    'rest_framework_jwt'
 ]
 
 MIDDLEWARE = [
