@@ -67,4 +67,6 @@ class TagsView(APIView):
     queryset = Tag.objects.all()
     serializer = TagSerializer(queryset, many=True)
 
-    return Response(serializer.data)
+    return Response({
+      'tags': serializer.data
+    })
