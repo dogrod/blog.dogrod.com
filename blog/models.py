@@ -3,12 +3,17 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from taggit.managers import TaggableManager
+from taggit.models import TaggedItemBase
 
 # Custom QuerySet manager
 class PublishedManager(models.Manager):
   def get_queryset(self):
     return super(PublishedManager, self).get_queryset()\
                                         .filter(status='published')
+
+class TaggedPost(TaggedItemBase):
+    content_object = models.ForeignKey('Post')
+
 # Create your models here.
 class Post(models.Model):
   STATUS_CHOICES = (
@@ -24,7 +29,7 @@ class Post(models.Model):
   create_at = models.DateTimeField(auto_now_add = True)
   update_at = models.DateTimeField(auto_now = True)
   status = models.CharField(max_length = 10, choices = STATUS_CHOICES, default = 'draft')
-  tags = TaggableManager()
+  tags = TaggableManager(through = TaggedPost)
   
   class Meta:
     ordering = ('-publish_at',)

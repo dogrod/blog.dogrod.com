@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from taggit.models import Tag
 from ..models import Post, Comment
 
 # Define serializer for comment in post
@@ -17,7 +18,7 @@ class CommentSerializer(serializers.ModelSerializer):
     model = Comment
     fields = ('id', 'name', 'body', 'create_at')
 
-class StringListField(serializers.ListField):
+class TagSerializerField(serializers.ListField):
   """
   Serializer of tag in post
   Get from http://www.django-rest-framework.org/api-guide/fields/#listfield
@@ -27,11 +28,27 @@ class StringListField(serializers.ListField):
   def to_representation(self, data):
     return data.values('name', 'slug') # you change the representation style here.
 
+class TagSerializer(serializers.ModelSerializer):
+  """
+  Serializer of tag in list
+  """
+  # tags = TagSerializerField()
+  
+  class Meta:
+    model = Tag
+    fields = ('id', 'name', 'slug')
+
+  def create(self, validated_data):
+    tags = validated_data.pop('tags')
+    instance = super(TagSerializer, self).create(validated_data)
+    instance.tags.set(*tags)
+    return instance
+
 class PostSerializer(serializers.ModelSerializer):
   """
   Serializer of Post in post list
   """
-  tags = StringListField()
+  tags = TagSerializerField()
   author = UserSerializer()
 
   class Meta:
@@ -42,7 +59,7 @@ class PostDetailSerializer(serializers.ModelSerializer):
   """
   Serializer of Post in post detail
   """
-  tags = StringListField()
+  tags = TagSerializerField()
   author = UserSerializer()  
   comments = CommentSerializer(many = True)
 
