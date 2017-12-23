@@ -3,6 +3,8 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from taggit.managers import TaggableManager
+from django.template.defaultfilters import slugify as default_slugify
+from unidecode import unidecode
 from taggit.models import TaggedItemBase
 
 # Custom QuerySet manager
@@ -36,6 +38,18 @@ class Post(models.Model):
 
   def __str__(self):
     return self.title
+
+  def save(self, *args, **kwargs):
+    if not self.slug:
+      self.slug = self.slugify(self.title)
+    
+    super(Post, self).save(*args, **kwargs)
+
+  def slugify(self, title, i = None):
+    slug = default_slugify(unidecode(title))
+    if i is not None:
+      slug += '_%d' % i
+    return slug
 
   def get_absolute_url(self):
     return reverse('post:post_detail',
