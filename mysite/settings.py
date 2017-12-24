@@ -148,4 +148,12 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 20
 }
 
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'account.api.views.jwt_response_payload_handler',
+    # 'JWT_EXPIRATION_DELTA': datetime.timedelta(days=180),
+    # 'JWT_ALLOW_REFRESH': False,
+    # 'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=30),
+    # 'JWT_SECRET_KEY': 'generate_a_secret_key',
+}
+
 CORS_ORIGIN_ALLOW_ALL = True

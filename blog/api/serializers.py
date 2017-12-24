@@ -8,7 +8,7 @@ class UserSerializer(serializers.Serializer):
   Serializer of Django's default user
   """
   email = serializers.EmailField()
-  username = serializers.CharField(max_length=100)
+  username = serializers.CharField(max_length = 100)
 
 class CommentSerializer(serializers.ModelSerializer):
   """
