@@ -3,7 +3,6 @@ services:
   dev:
     build: .
     command: bash -c 'python3 manage.py collectstatic <<< yes &&
-                      python3 manage.py makemigrations &&
                       python3 manage.py migrate --noinput &&
                       uwsgi --ini uwsgi.ini'
     volumes:
