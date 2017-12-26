@@ -72,6 +72,7 @@ class Comment(models.Model):
   post = models.ForeignKey(Post, related_name = 'comments')
   name = models.CharField(max_length = 80)
   email = models.EmailField()
+  author = models.ForeignKey(User, related_name='post_comments', blank=True, null=True)
   content = models.TextField(verbose_name = u'content')
   create_at = models.DateTimeField(auto_now_add = True)
   update_at = models.DateTimeField(auto_now = True)
