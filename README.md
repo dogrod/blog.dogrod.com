@@ -10,4 +10,5 @@
 ## To-Do
 - [x] REST API output
 - [ ] Frontend & Backend Seperation
-- [ ] User system
+- [x] User system
+- [x] Migrate to PostgreSQL

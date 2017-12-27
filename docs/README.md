@@ -11,3 +11,4 @@
 - [x] REST API output
 - [ ] Frontend & Backend Seperation
 - [x] User system
+- [x] Migrate to PostgreSQL
