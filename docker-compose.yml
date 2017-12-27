@@ -1,6 +1,13 @@
-version:  '2'
+version:  '3'
 services:
-  dev:
+  db:
+    image: postgres:10
+    expose:
+      - 5432
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - pg_backups:/pg_backups
+  web:
     build: .
     command: bash -c 'python3 manage.py collectstatic <<< yes &&
                       python3 manage.py migrate --noinput &&
@@ -9,3 +16,9 @@ services:
       - .:/home/service
     ports:
       - '5901:8000'
+    depends_on:
+    - db
+    
+volumes:
+  pg_data: {}
+  pg_backups: {}
