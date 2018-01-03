@@ -12,3 +12,7 @@
 - [ ] Frontend & Backend Seperation
 - [x] User system
 - [x] Migrate to PostgreSQL
+
+## Deploy requirement
+- PostgreSQL
+- Config File
