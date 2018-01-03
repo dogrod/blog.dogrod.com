@@ -10,10 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
+import configparser
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+config = configparser.ConfigParser()
+config.read('config.ini')
 
 
 # Quick-start development settings - unsuitable for production
@@ -82,12 +86,18 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+postgres_config = config['POSTGRES']
+
+DB_NAME = postgres_config['DB_NAME']
+DB_USER = postgres_config['DB_USER']
+DB_PASSWORD = postgres_config['DB_PASSWORD']
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
         'HOST': 'db',
         'PORT': 5432
     }

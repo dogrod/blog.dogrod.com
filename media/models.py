@@ -1,4 +1,4 @@
-import os
+import configparser, os
 
 from upyun import upyun
 from django.db import models
@@ -7,14 +7,18 @@ from django.utils.six.moves.urllib.parse import urljoin
 from django.utils.encoding import filepath_to_uri
 from django.utils.deconstruct import deconstructible
 
+config = configparser.ConfigParser()
+config.read('config.ini')
+upyun_config = config['UPYUN']
+
 # Custom storage
 # upyun docs: https://github.com/upyun/python-sdk
 @deconstructible
 class UpYunStorage(Storage):
-  BUCKET_NAME = os.environ.get('UPYUN_BUCKET_NAME') or 'dogrod-media-test'
-  USERNAME = os.environ.get('UPYUN_USERNAME') or 'dogrodtest'
-  PASSWORD = os.environ.get('UPYUN_PASSWORD') or '123456abc'
-  BASE_URL = os.environ.get('UPYUN_BASE_URL') or '//static.dogrod.xyz/'
+  BUCKET_NAME = upyun_config['BUCKET_NAME']
+  USERNAME = upyun_config['USERNAME']
+  PASSWORD = upyun_config['PASSWORD']
+  BASE_URL = upyun_config['BASE_URL']
 
   up = upyun.UpYun(BUCKET_NAME, USERNAME, PASSWORD, timeout = 30, endpoint = upyun.ED_AUTO)
 
