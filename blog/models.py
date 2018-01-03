@@ -35,7 +35,7 @@ class Post(models.Model):
     update_at = models.DateTimeField(auto_now=True)
     status = models.CharField(
         max_length=10, choices=STATUS_CHOICES, default='draft')
-    tags = TaggableManager(through=TaggedPost)
+    tags = TaggableManager(through=TaggedPost, blank=True)
 
     class Meta:
         ordering = ('-publish_at', )
