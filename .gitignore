@@ -5,3 +5,4 @@
 dist/
 dockerfile
 docker-compose.yml
+config.ini
