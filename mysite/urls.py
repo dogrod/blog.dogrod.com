@@ -18,12 +18,12 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token
 
 urlpatterns = [
-    url(r'^', include('blog.urls', namespace = 'post', app_name = 'post')),
+    url(r'^', include('blog.urls', namespace='post', app_name='post')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^api/blog/', include('blog.api.urls', namespace = 'blog_api')),
-    url(r'^account/', include('account.api.urls', namespace = 'user_api'))
+    url(r'^api/blog/', include('blog.api.urls', namespace='blog_api')),
+    url(r'^account/', include('account.api.urls', namespace='user_api'))
     # url(r'^api/account/', include('account.api.urls', namespace = 'account_api'))
-] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+] + static(
+    settings.STATIC_URL, document_root=settings.STATIC_ROOT)
