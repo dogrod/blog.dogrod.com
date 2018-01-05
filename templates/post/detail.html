@@ -2,7 +2,7 @@
 {% load static from staticfiles %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/post/detail.css' %}">    
+<link rel="stylesheet" href="{% static 'css/post/detail.css' %}">
 {% endblock %}
 
 {% block title %}
@@ -14,17 +14,28 @@
   <div class="post-content">
     <div class="post__title">{{ post.title }}</div>
     <div class="post__info">{{ post.create_at }} - By {{ post.author }} </div>
-    <p>{{ post.body | linebreaks }}</p>
+    <p>{{ post.content | linebreaks }}</p>
+    {% if post.tags.all %}
+      <p class="post__tags">
+        Tags:
+        {% for tag in post.tags.all %}
+          <a href="{% url "post:post_list_by_tag" tag.slug %}">
+            {{ tag.name }}
+          </a>
+          {% if not forloop.last %}, {% endif %}
+        {% endfor %}
+      </p>
+    {% endif %}
   </div>
   <div class="post-comments__wrapper">
     <div class="post-comments">
       {% with comments.count as total_comments %}
       <h2>
-        {{ total_comments }}
-        comment{{ total_comments | pluralize }}
+        {{ total_comments }} comment{{ total_comments | pluralize }}
       </h2>
       {% endwith %}
-      {% for comment in comments %}
+      <p>Comment system is temporarily closed.</p>
+      <!-- {% for comment in comments %}
         <div class="post-comment">
           <p class="post-comment__info">
             <span class="post-comment__commenter">{{ comment.name }}</span>
@@ -47,7 +58,7 @@
           {% csrf_token %}
           <p><input type="submit" value="Add comment"></p>
         </form>
-      {% endif %}
+      {% endif %} -->
     </div>
   </div>
 {% endblock  %}
