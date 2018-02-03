@@ -28,7 +28,9 @@ SECRET_KEY = config.get('SECRET', 'KEY', raw=True)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*',
+]
 
 # Application definition
 
@@ -155,7 +157,8 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS':
     'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE':
-    20
+    20,
+    'DATETIME_FORMAT': '%Y-%m-%dT%H:%M:%S',
 }
 
 JWT_AUTH = {

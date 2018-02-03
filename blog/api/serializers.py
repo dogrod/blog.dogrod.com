@@ -63,6 +63,11 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = ('id', 'title', 'slug', 'author', 'publish_at', 'tags')
 
+    def to_representation(self, data):
+        representation = super(PostSerializer, self).to_representation(data)
+        representation['publish_at'] = data.publish_at.strftime('%Y-%m-%dT%H:%M')
+        return representation
+
 
 class PostDetailSerializer(serializers.ModelSerializer):
     """
