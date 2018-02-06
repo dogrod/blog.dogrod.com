@@ -9,6 +9,11 @@
 
 ## To-Do
 - [x] REST API output
-- [ ] Frontend & Backend Seperation
+- [x] Frontend & Backend Seperation
 - [x] User system
 - [x] Migrate to PostgreSQL
+- [ ] Add categories
+
+## Deploy requirement
+- PostgreSQL
+- Config File
