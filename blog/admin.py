@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 from pagedown.widgets import AdminPagedownWidget
-from .models import Post, Comment
+from .models import Post, Comment, Category
 
 
 # Register your models here.
@@ -37,5 +37,10 @@ class CommentAdmin(admin.ModelAdmin):
     search_fields = ('name', 'email', 'content')
 
 
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('title', )}
+
+
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(Category, CategoryAdmin)

@@ -19,6 +19,28 @@ class TaggedPost(TaggedItemBase):
     content_object = models.ForeignKey('Post')
 
 
+class Category(models.Model):
+    title = models.CharField(max_length=40, db_index=True)
+    slug = models.SlugField(max_length=100, db_index=True)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = self.slugify(self.title)
+
+        super(Category, self).save(*args, **kwargs)
+
+    def slugify(self, title, i=None):
+        slug = default_slugify(unidecode(title))
+        if i is not None:
+            slug += '_%d' % i
+        return slug
+
+
 # Create your models here.
 class Post(models.Model):
     STATUS_CHOICES = (
@@ -36,6 +58,7 @@ class Post(models.Model):
     status = models.CharField(
         max_length=10, choices=STATUS_CHOICES, default='draft')
     tags = TaggableManager(through=TaggedPost, blank=True)
+    category = models.ForeignKey(Category, related_name='posts', blank=True, null=True)
 
     class Meta:
         ordering = ('-publish_at', )
