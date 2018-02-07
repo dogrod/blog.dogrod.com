@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from taggit.models import Tag
-from ..models import Post, Comment
+from ..models import Post, Comment, Category
 
 
 # Define serializer for comment in post
@@ -20,6 +20,16 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ('id', 'name', 'content', 'create_at')
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    """
+    Serializer of category in post
+    """
+
+    class Meta:
+        model = Category
+        fields = ('id', 'title', 'slug', 'create_at')
 
 
 class TagSerializerField(serializers.ListField):
@@ -76,8 +86,9 @@ class PostDetailSerializer(serializers.ModelSerializer):
     tags = TagSerializerField()
     author = UserSerializer()
     comments = CommentSerializer(many=True)
+    category = CategorySerializer()
 
     class Meta:
         model = Post
         fields = ('id', 'title', 'content', 'slug', 'author', 'publish_at',
-                  'comments', 'tags')
+                  'comments', 'tags', 'category')
