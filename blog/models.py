@@ -7,6 +7,8 @@ from django.template.defaultfilters import slugify as default_slugify
 from unidecode import unidecode
 from taggit.models import TaggedItemBase
 
+import markdown
+
 
 # Custom QuerySet manager
 class PublishedManager(models.Manager):
@@ -77,6 +79,9 @@ class Post(models.Model):
         if i is not None:
             slug += '_%d' % i
         return slug
+
+    def get_content_as_markdown(self):
+        return markdown.markdown(self.content, safe_mode='escape')
 
     def get_absolute_url(self):
         return reverse(

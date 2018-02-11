@@ -29,7 +29,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ('id', 'title', 'slug', 'create_at')
+        fields = ('title', 'slug')
 
 
 class TagSerializerField(serializers.ListField):
@@ -92,3 +92,8 @@ class PostDetailSerializer(serializers.ModelSerializer):
         model = Post
         fields = ('id', 'title', 'content', 'slug', 'author', 'publish_at',
                   'comments', 'tags', 'category')
+
+    def to_representation(self, data):
+        representation = super(PostDetailSerializer, self).to_representation(data)
+        representation['content'] = data.get_content_as_markdown()
+        return representation
