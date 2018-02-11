@@ -84,8 +84,8 @@ class Post(models.Model):
         return markdown.markdown(self.content, safe_mode='escape')
 
     def get_summary(self):
-        if len(self.content) > 120:
-            return '{0}...'.format(self.content[:120])
+        if len(self.content) > 40:
+            return '{0}...'.format(self.content[:40])
         else:
             return self.content
 
