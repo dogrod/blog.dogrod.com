@@ -71,11 +71,11 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('id', 'title', 'slug', 'author', 'publish_at', 'tags')
+        fields = ('id', 'title', 'content', 'slug', 'author', 'publish_at', 'tags')
 
     def to_representation(self, data):
         representation = super(PostSerializer, self).to_representation(data)
-        representation['publish_at'] = data.publish_at.strftime('%Y-%m-%dT%H:%M')
+        representation['content'] = data.get_summary_as_markdown()
         return representation
 
 

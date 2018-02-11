@@ -83,6 +83,18 @@ class Post(models.Model):
     def get_content_as_markdown(self):
         return markdown.markdown(self.content, safe_mode='escape')
 
+    def get_summary(self):
+        if len(self.content) > 120:
+            return '{0}...'.format(self.content[:120])
+        else:
+            return self.content
+
+    def get_summary_as_markdown(self):
+        return markdown.markdown(self.get_summary(), safe_mode='escape')
+
+    def get_formatted_publish_time(self):
+        return self.publish_at.strftime('%Y-%m-%dT%H:%M')
+
     def get_absolute_url(self):
         return reverse(
             'post:post_detail',
