@@ -161,7 +161,8 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS':
     'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE':
-    20
+    20,
+    'DATETIME_FORMAT': '%Y-%m-%dT%H:%M:%S',
 }
 
 JWT_AUTH = {
