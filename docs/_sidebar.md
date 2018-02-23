@@ -3,3 +3,4 @@
   - [Model](/blog?id=models)
 - [Media System](/media)
 - [Todo & did System](/todo_did)
+- [Changelog](/changelog)

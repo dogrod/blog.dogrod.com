@@ -12,7 +12,7 @@
 - [x] Frontend & Backend Seperation
 - [x] User system
 - [x] Migrate to PostgreSQL
-- [ ] Add categories
+- [x] Add categories
 
 ## Deploy requirement
 - PostgreSQL
