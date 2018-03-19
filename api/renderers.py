@@ -7,7 +7,9 @@ class CustomJSONRenderer(JSONRenderer):
         ret = super(CustomJSONRenderer, self).render(
             data, accepted_media_type=None, renderer_context=None)
 
-        if hasattr(response.data, 'code'):
+        # print(response.data['code'])
+
+        if 'code' in response.data:
             return ret
 
         return """{{
