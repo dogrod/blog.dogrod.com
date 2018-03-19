@@ -11,13 +11,10 @@ class PostPagination(PageNumberPagination):
     max_page_size = 100
 
     def get_paginated_response(self, data):
+        print(self.request.path)
 
         return Response({
-            # 'links': {
-            #   'next': self.get_next_link(),
-            #   'previous': self.get_previous_link()
-            # },
-            'data':
+            'posts':
             data,
             'total':
             self.page.paginator.count,
@@ -25,6 +22,6 @@ class PostPagination(PageNumberPagination):
             self.request.query_params.get('page', 1),
             'pageSize':
             self.request.query_params.get('pageSize', 10),
-            'PageCount':
+            'pageCount':
             self.page.paginator.num_pages,
         })

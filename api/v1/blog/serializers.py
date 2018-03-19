@@ -40,8 +40,7 @@ class TagSerializerField(serializers.ListField):
     child = serializers.CharField()
 
     def to_representation(self, data):
-        return data.values('name',
-                           'slug')  # you change the representation style here.
+        return data.values_list('name', flat=True)  # you change the representation style here.
 
 
 class TagSerializer(serializers.ModelSerializer):
