@@ -52,7 +52,7 @@ class TagSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tag
-        fields = ('id', 'name', 'slug')
+        fields = ('name', 'slug')
 
     def create(self, validated_data):
         tags = validated_data.pop('tags')

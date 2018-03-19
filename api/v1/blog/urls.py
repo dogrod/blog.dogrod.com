@@ -9,7 +9,7 @@ urlpatterns = [
         views.PostDetailView.as_view(),
         name='post_detail'),
     # Tag list API
-    # url(r'^tags$', views.TagsView.as_view(), name='tag_list'),
+    url(r'^tags$', views.TagsView.as_view(), name='tag_list'),
     # Tag detail API, return a post list with tag
     url(r'^tag/(?P<tag_name>[-\w]+)',
         views.PostListView().as_view(),

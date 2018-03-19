@@ -1,10 +1,10 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, views
 from rest_framework.response import Response
 
 from taggit.models import Tag
 from blog.models import Post
-from .serializers import PostSerializer, PostDetailSerializer
+from .serializers import PostSerializer, PostDetailSerializer, TagSerializer
 from .pagination import PostPagination
 
 
@@ -52,3 +52,15 @@ class PostDetailView(generics.RetrieveAPIView):
         post = get_object_or_404(queryset, slug=post_slug)
         serializer = PostDetailSerializer(post)
         return Response(serializer.data)
+
+
+class TagsView(views.APIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+
+    def get(self, request, format=None):
+        queryset = Tag.objects.all()
+        serializer = TagSerializer(queryset, many=True)
+
+        return Response({'tags': serializer.data})
