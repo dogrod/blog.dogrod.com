@@ -47,8 +47,8 @@ class PostDetailView(generics.RetrieveAPIView):
     serializer_class = PostDetailSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
 
-    def retrieve(self, request, slug=None):
+    def retrieve(self, request, post_slug=None):
         queryset = Post.published.all()
-        post = get_object_or_404(queryset, slug=slug)
+        post = get_object_or_404(queryset, slug=post_slug)
         serializer = PostDetailSerializer(post)
         return Response(serializer.data)

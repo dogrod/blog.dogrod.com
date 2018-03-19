@@ -5,7 +5,7 @@ urlpatterns = [
     # Post list
     url(r'^posts$', views.PostListView().as_view(), name='post_list'),
     # Post detail
-    url(r'^posts/(?P<slug>[-\w]+)',
+    url(r'^posts/(?P<post_slug>[-\w]+)',
         views.PostDetailView.as_view(),
         name='post_detail'),
     # Tag list API
