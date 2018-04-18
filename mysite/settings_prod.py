@@ -162,6 +162,9 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static/'), )
 STATIC_ROOT = os.path.join(BASE_DIR, 'dist/static/')
 
 REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'api.renderers.CustomJSONRenderer',
+    ),
     'DEFAULT_PERMISSION_CLASSES':
     ('rest_framework.permissions.IsAuthenticated', ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -174,6 +177,7 @@ REST_FRAMEWORK = {
     'PAGE_SIZE':
     20,
     'DATETIME_FORMAT': '%Y-%m-%dT%H:%M:%S',
+    'EXCEPTION_HANDLER': 'api.exception_handler.custom_exception_handler'
 }
 
 JWT_AUTH = {
