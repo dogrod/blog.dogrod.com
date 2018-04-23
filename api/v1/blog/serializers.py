@@ -74,7 +74,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     def to_representation(self, data):
         representation = super(PostSerializer, self).to_representation(data)
-        representation['content'] = data.get_summary_as_markdown()
+        representation['content'] = data.get_summary()
         return representation
 
 
@@ -94,6 +94,6 @@ class PostDetailSerializer(serializers.ModelSerializer):
 
     def to_representation(self, data):
         representation = super(PostDetailSerializer, self).to_representation(data)
-        representation['content'] = data.get_content_as_markdown()
+        # representation['content'] = data.get_content_as_markdown()
         representation['category'] = data.category.title
         return representation
