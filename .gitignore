@@ -2,6 +2,9 @@
 *.db
 *.sqlite3
 */__pycache__
+.idea/
+.vscode/
+venv/
 dist/
 dockerfile
 docker-compose.yml
