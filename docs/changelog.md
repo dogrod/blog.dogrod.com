@@ -2,6 +2,9 @@
 
 [Deployment Detail](/deployment)
 
+## 0.3(2018-07)
+* Change API urls more RESTful
+
 ## 0.2.1(2018-01-13)
 * Security improvement
 * Date output format changed (by DRF)

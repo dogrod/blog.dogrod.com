@@ -55,7 +55,7 @@ results | Post数组 | array | -
 
 **2. 获取Post详情**
 
-**请求URL：** /api/blog/post/:id
+**请求URL：** /api/blog/posts/:postId
 
 **请求类型：** GET
 
@@ -98,7 +98,7 @@ tags | 包含所有tags的数组 | array | -
 
 **4. 获取指定tag下的posts**
 
-**请求URL：** /api/blog/tag/:tag_slug
+**请求URL：** /api/blog/posts/tag/:tag_slug
 
 **请求类型：** GET
 
