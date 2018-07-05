@@ -3,28 +3,32 @@
 [Deployment Detail](/deployment)
 
 ## 0.3(2018-07)
-* Change API urls more RESTful
+* **[Change]** Make API urls more RESTful
 
-## 0.2.1(2018-01-13)
-* Security improvement
-* Date output format changed (by DRF)
-* Add Category
+## 0.2.2(2018-04)
+* **[Feature]** Add custom JSON renderer
+* **[Feature]** Add global exception handler
 
-
-## 0.2.0(2018-01-05)
-* Move account related API under /account
-* Some Django Templates rendering changes (Plan to abandon Django Templates rendered pages)
-
-## 0.2.0-beta(2018-01-03)
-* RESTful API support by Django Rest Framework(DRF)
-* Migrate DB to PostgreSQL (from SQLite3)
-* Account feature (authentication via DRF-JWT)
-* Add author property to Commit
-* Move Django Templates rendered pages under /views route
-* Docs by docsify
+## 0.2.1(2018-01)
+* **[Improve]** Security improvement
+* **[Change]** Date output format changed (by DRF)
+* **[Feature]** Add Category
 
 
-## 0.1.0(2017-12-15)
-* Basic blog system construction
-* Tag feature support by taggit
-* Post list & detail rendering via Django Templates
+## 0.2.0(2018-01)
+* **[Change]** Move account related API under /account
+* **[Change]** Some Django Templates rendering changes (Plan to abandon Django Templates rendered pages)
+
+## 0.2.0-beta(2018-01)
+* **[Feature]** RESTful API support by Django Rest Framework(DRF)
+* **[Change]** Migrate DB to PostgreSQL (from SQLite3)
+* **[Feature]** Account feature (authentication via DRF-JWT)
+* **[Feature]** Add author property to Commit
+* **[Change]** Move Django Templates rendered pages under /views route
+* **[Feature]** Docs by docsify
+
+
+## 0.1.0(2017-12)
+* **[Feature]** Basic blog system construction
+* **[Feature]** Tag feature support by taggit
+* **[Feature]** Post list & detail rendering via Django Templates
