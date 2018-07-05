@@ -17,12 +17,14 @@ class PostListView(generics.ListAPIView):
     pagination_class = PostPagination
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
 
-    def list(self, request, tag_name=None):
+    def list(self, request):
         queryset = self.filter_queryset(self.get_queryset())
         tag = None
+        tag_in_query = request.query_params.get('tag')
 
-        if tag_name:
-            tag = get_object_or_404(Tag, name=tag_name)
+        # If there's 'tag' in request query, filter post list before response.
+        if tag_in_query:
+            tag = get_object_or_404(Tag, name=tag_in_query)
             queryset = queryset.filter(tags__in=[tag])
 
         page = self.paginate_queryset(queryset)
