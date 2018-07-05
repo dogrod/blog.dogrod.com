@@ -22,7 +22,7 @@
 
 #### 前台接口
 
-**1. 获取所有Posts**
+**1. 获取 Posts 列表**
 
 **请求URL：** /api/blog/posts
 
@@ -34,6 +34,7 @@ Property | Description | Type | Remark
 ---- | --- | --- | ---
 page | 页码 | number | -
 pageSize | 每页内容数量 | number | -
+tag | Tag name | string | -
 
 **响应参数列表：**
 
@@ -95,38 +96,6 @@ tags | 包含所有tags的数组 | array | -
 - id | id | number | -
 - name | tag名称 | string | -
 -slug | tag slug | string | -
-
-**4. 获取指定tag下的posts**
-
-**请求URL：** /api/blog/posts/tag/:tag_slug
-
-**请求类型：** GET
-
-**请求参数列表：**
-
-Property | Description | Type | Remark
----- | --- | --- | ---
-page | 页码 | number | -
-pageSize | 每页内容数量 | number | -
-
-**响应参数列表：**
-
-Property | Description | Type | Remark
----- | --- | --- | ---
-total | post总数 | number | - 
-pageNumber | 当前页码 | number | - 
-pageSize | 每页post数量 | number | - 
-pageCount | 总页数 | number | - 
-results | Post数组 | array | -
-- id | post ID | number | -
-- title | 标题 | string | -
-- slug | slug | string | -
-- author | 作者 | object | -
--- username | 用户名 | string | -
--- email | 邮箱 | string | -
-- publish_at | 发布时间 | date | -
-- tags | 标签 | string | -
-
 
 ## Models
 
