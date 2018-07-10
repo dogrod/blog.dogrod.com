@@ -90,7 +90,7 @@ class PostDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ('id', 'title', 'content', 'slug', 'author', 'publish_at',
-                  'comments', 'tags', 'category')
+                  'comments', 'tags', 'category', 'like')
 
     def to_representation(self, data):
         representation = super(PostDetailSerializer, self).to_representation(data)
