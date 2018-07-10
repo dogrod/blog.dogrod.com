@@ -43,13 +43,14 @@ class Category(models.Model):
         return slug
 
 
+STATUS_CHOICES = (
+    ('draft', 'Draft'),
+    ('published', 'Published'),
+)
+
+
 # Create your models here.
 class Post(models.Model):
-    STATUS_CHOICES = (
-        ('draft', 'Draft'),
-        ('published', 'Published'),
-    )
-
     title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, allow_unicode=True)
     author = models.ForeignKey(User, related_name='blog_posts')
