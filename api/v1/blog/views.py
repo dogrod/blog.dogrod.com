@@ -1,10 +1,11 @@
+from django.http import Http404
 from django.shortcuts import get_object_or_404
-from rest_framework import generics, permissions, views
+from rest_framework import generics, permissions, views, status
 from rest_framework.response import Response
 
 from taggit.models import Tag
 from blog.models import Post
-from .serializers import PostSerializer, PostDetailSerializer, TagSerializer
+from .serializers import PostListSerializer, PostSerializer, TagSerializer
 from .pagination import PostPagination
 
 
@@ -13,7 +14,7 @@ class PostListView(generics.ListAPIView):
     List API View of /posts
     """
     queryset = Post.published.all()
-    serializer_class = PostSerializer
+    serializer_class = PostListSerializer
     pagination_class = PostPagination
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
 
@@ -46,13 +47,13 @@ class PostDetailView(generics.RetrieveAPIView):
     return detail of specific post
     """
     queryset = Post.published.all()
-    serializer_class = PostDetailSerializer
+    serializer_class = PostSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
 
     def retrieve(self, request, post_slug=None):
         queryset = Post.published.all()
         post = get_object_or_404(queryset, slug=post_slug)
-        serializer = PostDetailSerializer(post)
+        serializer = PostSerializer(post)
         return Response(serializer.data)
 
 
@@ -66,3 +67,42 @@ class TagsView(views.APIView):
         serializer = TagSerializer(queryset, many=True)
 
         return Response({'tags': serializer.data})
+
+
+class PostDetail(views.APIView):
+    """
+    Retrieve a post instance.
+    """
+    permission_classes = (permissions.AllowAny, )
+
+    def get_object(self, post_slug):
+        try:
+            return Post.objects.get(slug=post_slug)
+        except Post.DoesNotExist:
+            raise Http404
+
+    def get(self, request, post_slug):
+        post = self.get_object(post_slug)
+        serializer = PostSerializer(post)
+        return Response(serializer.data)
+
+    def put(self, request, post_slug):
+        content = request.data.get('content')
+
+        post = self.get_object(post_slug)
+        serializer = PostSerializer(post, data={'content': content}, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class LikePost(PostDetail):
+    def get(self, request, post_slug):
+        post = self.get_object(post_slug)
+        like = post.like+1
+        serializer = PostSerializer(post, {'like': like}, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

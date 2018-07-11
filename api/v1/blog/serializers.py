@@ -1,6 +1,7 @@
+from django.utils import timezone
 from rest_framework import serializers
 from taggit.models import Tag
-from blog.models import Post, Comment, Category
+from blog.models import Post, Comment, Category, STATUS_CHOICES
 
 
 # Define serializer for comment in post
@@ -61,7 +62,7 @@ class TagSerializer(serializers.ModelSerializer):
         return instance
 
 
-class PostSerializer(serializers.ModelSerializer):
+class PostListSerializer(serializers.ModelSerializer):
     """
   Serializer of Post in post list
   """
@@ -73,12 +74,12 @@ class PostSerializer(serializers.ModelSerializer):
         fields = ('id', 'title', 'content', 'slug', 'author', 'publish_at', 'tags')
 
     def to_representation(self, data):
-        representation = super(PostSerializer, self).to_representation(data)
+        representation = super(PostListSerializer, self).to_representation(data)
         representation['content'] = data.get_summary()
         return representation
 
 
-class PostDetailSerializer(serializers.ModelSerializer):
+class PostSerializer(serializers.ModelSerializer):
     """
   Serializer of Post in post detail
   """
@@ -93,7 +94,7 @@ class PostDetailSerializer(serializers.ModelSerializer):
                   'comments', 'tags', 'category', 'like')
 
     def to_representation(self, data):
-        representation = super(PostDetailSerializer, self).to_representation(data)
+        representation = super(PostSerializer, self).to_representation(data)
         # representation['content'] = data.get_content_as_markdown()
         representation['category'] = data.category.title
         return representation
