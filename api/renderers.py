@@ -2,7 +2,9 @@ from rest_framework.renderers import JSONRenderer
 
 
 class CustomJSONRenderer(JSONRenderer):
-    # Convert underscore case name to camelcase
+    """
+    Convert underscore case name to camelcase
+    """
     def render(self, data, accepted_media_type=None, renderer_context=None):
         if data:
             data = recursive_key_map(underscore_to_camelcase, data)
@@ -20,8 +22,13 @@ class CustomJSONRenderer(JSONRenderer):
         }}""".format(0, ret.decode()).encode()
 
 
-# Convert underscore styled word to camelcase
 def underscore_to_camelcase(word, lower_first=True):
+    """
+    Convert underscore styled word to camelcase
+    :param word:
+    :param lower_first:
+    :return:
+    """
     result = ''.join(char.capitalize() for char in word.split('_'))
     if lower_first:
         return result[0].lower() + result[1:]
@@ -29,8 +36,13 @@ def underscore_to_camelcase(word, lower_first=True):
         return result
 
 
-# Recursive key-map object
 def recursive_key_map(method, data):
+    """
+    Recursive key-map object
+    :param method:
+    :param data:
+    :return:
+    """
     if isinstance(data, dict):
         new_dict = {}
         for key, value in data.items():
