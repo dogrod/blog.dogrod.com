@@ -4,8 +4,8 @@ from rest_framework import generics, permissions, views, status
 from rest_framework.response import Response
 
 from taggit.models import Tag
-from blog.models import Post
-from .serializers import PostListSerializer, PostSerializer, TagSerializer
+from blog.models import Post, ActionSummary
+from .serializers import PostListSerializer, PostSerializer, TagSerializer, ActionSummarySerializer
 from .pagination import PostPagination
 
 
@@ -75,16 +75,27 @@ class PostDetail(views.APIView):
     """
     permission_classes = (permissions.AllowAny, )
 
-    def get_object(self, post_slug):
+    def get_post(self, post_slug):
         try:
             return Post.objects.get(slug=post_slug)
         except Post.DoesNotExist:
             raise Http404
 
-    def get(self, request, post_slug):
-        post = self.get_object(post_slug)
-        serializer = PostSerializer(post)
-        return Response(serializer.data)
+    def get_summary(self, post):
+        objects, created = ActionSummary.objects.get_or_create(post=post)
+        return objects
+
+    def get(self, _request, post_slug):
+        post = self.get_post(post_slug)
+        action_summary = self.get_summary(post)
+        post_serializer = PostSerializer(post)
+        action_summary_serializer = ActionSummarySerializer(action_summary)
+
+        res = {}
+        res.update(post_serializer.data)
+        res.update(action_summary_serializer.data)
+
+        return Response(res)
 
     def put(self, request, post_slug):
         content = request.data.get('content')

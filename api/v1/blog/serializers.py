@@ -1,7 +1,7 @@
 from django.utils import timezone
 from rest_framework import serializers
 from taggit.models import Tag
-from blog.models import Post, Comment, Category, STATUS_CHOICES
+from blog.models import Post, Comment, Category, ActionSummary
 
 
 # Define serializer for comment in post
@@ -98,3 +98,22 @@ class PostSerializer(serializers.ModelSerializer):
         # representation['content'] = data.get_content_as_markdown()
         representation['category'] = data.category.title
         return representation
+
+
+class ActionSummarySerializer(serializers.ModelSerializer):
+    """
+    Serializer of ActionSummary
+    """
+    likes = serializers.SerializerMethodField('get_like_count')
+    comments = serializers.SerializerMethodField('get_comment_count')
+
+    class Meta:
+        model = ActionSummary
+        fields = ('likes', 'comments')
+
+    def get_like_count(self, data):
+        return data.like_count
+
+    def get_comment_count(self, data):
+        return data.comment_count
+
