@@ -128,3 +128,23 @@ class Comment(models.Model):
 
     def __str__(self):
         return 'Comment by {} on {}'.format(self.name, self.post)
+
+
+class Like(models.Model):
+    """
+    Record of like action
+    """
+    post = models.ForeignKey(Post, related_name='like')
+    author = models.ForeignKey(User, related_name='post_like')
+    create_at = models.DateTimeField(auto_now_add=True)
+    deleted = models.BooleanField(default=False)
+
+
+class ActionSummary(models.Model):
+    """
+    Summary of likes & comments
+    """
+    post = models.ForeignKey(Post, related_name='likes')
+    like_count = models.IntegerField(default=0)
+    comment_count = models.IntegerField(default=0)
+
