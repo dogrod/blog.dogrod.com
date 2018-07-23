@@ -85,13 +85,12 @@ class PostSerializer(serializers.ModelSerializer):
   """
     tags = TagSerializerField()
     author = UserSerializer()
-    comments = CommentSerializer(many=True)
     category = CategorySerializer()
 
     class Meta:
         model = Post
         fields = ('id', 'title', 'content', 'slug', 'author', 'publish_at',
-                  'comments', 'tags', 'category')
+                  'tags', 'category')
 
     def to_representation(self, data):
         representation = super(PostSerializer, self).to_representation(data)
