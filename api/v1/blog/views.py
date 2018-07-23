@@ -95,14 +95,3 @@ class PostDetail(views.APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class LikePost(PostDetail):
-    def get(self, request, post_slug):
-        post = self.get_object(post_slug)
-        like = post.like+1
-        serializer = PostSerializer(post, {'like': like}, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

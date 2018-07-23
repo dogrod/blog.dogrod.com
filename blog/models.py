@@ -62,7 +62,6 @@ class Post(models.Model):
         max_length=10, choices=STATUS_CHOICES, default='draft')
     tags = TaggableManager(through=TaggedPost, blank=True)
     category = models.ForeignKey(Category, related_name='posts', blank=True, null=True)
-    like = models.IntegerField(default=0)
 
     class Meta:
         ordering = ('-publish_at', )
