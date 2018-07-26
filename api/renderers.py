@@ -9,17 +9,8 @@ class CustomJSONRenderer(JSONRenderer):
         if data:
             data = recursive_key_map(underscore_to_camelcase, data)
 
-        response = renderer_context['response']
-        ret = super(CustomJSONRenderer, self).render(
+        return super(CustomJSONRenderer, self).render(
             data, accepted_media_type=None, renderer_context=None)
-
-        if 'code' in response.data:
-            return ret
-
-        return """{{
-            "code": {},
-            "result": {}
-        }}""".format(0, ret.decode()).encode()
 
 
 def underscore_to_camelcase(word, lower_first=True):
