@@ -4,10 +4,13 @@ from rest_framework.views import exception_handler
 
 
 def custom_exception_handler(exc, context):
-    '''
+    """
     Custom exception handler for DRF.
     Follow from http://www.django-rest-framework.org/api-guide/exceptions/#custom-exception-handling
-    '''
+    :param exc:
+    :param context:
+    :return:
+    """
     # Call REST framework's default exception handler first,
     # to get the standard error response.
     response = exception_handler(exc, context)
