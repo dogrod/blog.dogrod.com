@@ -137,7 +137,7 @@ class Like(models.Model):
     post = models.ForeignKey(Post, related_name='like')
     author = models.ForeignKey(User, related_name='post_like')
     create_at = models.DateTimeField(auto_now_add=True)
-    deleted = models.BooleanField(default=False)
+    canceled = models.BooleanField(default=False)
 
 
 class ActionSummary(models.Model):
