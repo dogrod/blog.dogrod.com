@@ -4,12 +4,12 @@ from rest_framework import generics, permissions, views, status
 from rest_framework.response import Response
 
 from taggit.models import Tag
-from blog.models import Post, ActionSummary
-from .serializers import PostListSerializer, PostSerializer, TagSerializer, ActionSummarySerializer
+from blog.models import Post, ActionSummary, Like
+from .serializers import PostListSerializer, PostSerializer, TagSerializer, ActionSummarySerializer, LikeSerializer
 from .pagination import PostPagination
 
 
-class PostListView(generics.ListAPIView):
+class PostListAPIView(generics.ListAPIView):
     """
     List API View of /posts
     """
@@ -69,7 +69,7 @@ class TagsView(views.APIView):
         return Response({'tags': serializer.data})
 
 
-class PostDetail(views.APIView):
+class PostDetailAPIView(views.APIView):
     """
     Retrieve a post instance.
     """
@@ -106,3 +106,30 @@ class PostDetail(views.APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class LikePostAPIView(PostDetailAPIView):
+    """
+    Like post view
+    """
+    permission_classes = (permissions.AllowAny, )
+
+    def post(self, request, post_slug):
+        post = self.get_post(post_slug)
+
+        like = Like(post=post)
+        # Save author if provide
+        if request.user.is_authenticated:
+            like.author = request.user
+        like.save()
+
+        summary = self.get_summary(post)
+        summary.like_count = summary.like_count + 1
+        summary.save()
+
+        like_serializer = LikeSerializer(like)
+        res = {
+            'likes': summary.like_count,
+            'detail': like_serializer.data
+        }
+        return Response(res)

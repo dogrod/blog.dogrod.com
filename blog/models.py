@@ -135,7 +135,8 @@ class Like(models.Model):
     Record of like action
     """
     post = models.ForeignKey(Post, related_name='like')
-    author = models.ForeignKey(User, related_name='post_like')
+    author = models.ForeignKey(
+        User, related_name='post_like', blank=True, null=True)
     create_at = models.DateTimeField(auto_now_add=True)
     canceled = models.BooleanField(default=False)
 
