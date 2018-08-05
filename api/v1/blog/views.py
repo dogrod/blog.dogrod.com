@@ -123,8 +123,18 @@ class LikePostAPIView(PostDetailAPIView):
             like.author = request.user
         like.save()
 
+        increment = 1
+
+        try:
+            increment_in_request = request.data['increment']
+            if increment_in_request is not None and increment_in_request.isnumeric():
+                increment = int(increment_in_request)
+        except KeyError:
+            # Key is not present
+            pass
+
         summary = self.get_summary(post)
-        summary.like_count = summary.like_count + 1
+        summary.like_count = summary.like_count + increment
         summary.save()
 
         like_serializer = LikeSerializer(like)
