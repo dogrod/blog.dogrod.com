@@ -127,7 +127,9 @@ class LikePostAPIView(PostDetailAPIView):
 
         try:
             increment_in_request = request.data['increment']
-            if increment_in_request is not None and increment_in_request.isnumeric():
+            if isinstance(increment_in_request, int):
+                increment = increment_in_request
+            elif increment_in_request is not None and increment_in_request.isnumeric():
                 increment = int(increment_in_request)
         except KeyError:
             # Key is not present
