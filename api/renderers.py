@@ -1,3 +1,4 @@
+import collections
 from rest_framework.renderers import JSONRenderer
 
 
@@ -41,7 +42,7 @@ def recursive_key_map(method, data):
                 key = method(key)
             new_dict[key] = recursive_key_map(method, value)
         return new_dict
-    if hasattr(data, '__iter__') and not isinstance(data, str):
+    if isinstance(data, collections.Iterable) and not isinstance(data, str):
         return [recursive_key_map(method, value) for value in data]
     else:
         return data
