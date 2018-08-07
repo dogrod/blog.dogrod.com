@@ -4,10 +4,10 @@ from rest_framework import generics, permissions, views, status
 from rest_framework.response import Response
 
 from taggit.models import Tag
-from blog.models import Post, ActionSummary, Like
-from .serializers import PostListSerializer, PostSerializer, TagSerializer, ActionSummarySerializer, LikeSerializer
+from blog.models import Post, ActionSummary, Like, Comment
+from .serializers import PostListSerializer, PostSerializer, TagSerializer, ActionSummarySerializer, LikeSerializer, CommentSerializer
 from .pagination import PostPagination
-
+from .forms import CommentForm
 
 class PostListAPIView(generics.ListAPIView):
     """
@@ -69,12 +69,10 @@ class TagsView(views.APIView):
         return Response({'tags': serializer.data})
 
 
-class PostDetailAPIView(views.APIView):
+class PostBasedAPIVIew(views.APIView):
     """
-    Retrieve a post instance.
+    Basic API View of post to provide some method based on Post
     """
-    permission_classes = (permissions.AllowAny, )
-
     def get_post(self, post_slug):
         try:
             return Post.objects.get(slug=post_slug)
@@ -85,6 +83,12 @@ class PostDetailAPIView(views.APIView):
         objects, created = ActionSummary.objects.get_or_create(post=post)
         return objects
 
+
+class PostDetailAPIView(PostBasedAPIVIew):
+    """
+    Retrieve a post instance.
+    """
+    permission_classes = (permissions.AllowAny, )
     def get(self, _request, post_slug):
         post = self.get_post(post_slug)
         action_summary = self.get_summary(post)
@@ -108,7 +112,7 @@ class PostDetailAPIView(views.APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class LikePostAPIView(PostDetailAPIView):
+class LikePostAPIView(PostBasedAPIVIew):
     """
     Like post view
     """
@@ -143,5 +147,43 @@ class LikePostAPIView(PostDetailAPIView):
         res = {
             'likes': summary.like_count,
             'detail': like_serializer.data
+        }
+        return Response(res)
+
+
+class CommentAPIView(PostBasedAPIVIew):
+    """
+    Comment API VIew
+    """
+    permission_classes = (permissions.IsAuthenticated, )
+
+    def post(self, request, post_slug):
+        post = self.get_post(post_slug)
+
+        form = CommentForm(request.POST or None)
+
+        if not form.is_valid():
+            return Response({
+                'status': '-1',
+                'reason': form.errors,
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        content_data = form.cleaned_data.get('content')
+
+        comment = Comment(
+            post=post,
+            author=request.user,
+            content=content_data,
+        )
+        comment.save()
+
+        summary = self.get_summary(post)
+        summary.comment_count = summary.comment_count + 1
+        summary.save()
+
+        comment_serializer = CommentSerializer(comment)
+        res = {
+            'comments': summary.comment_count,
+            'detail': comment_serializer.data
         }
         return Response(res)

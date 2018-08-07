@@ -128,3 +128,16 @@ class LikeSerializer(serializers.ModelSerializer):
         model = Like
         fields = ('author', 'create_at', 'canceled')
 
+
+class CommentSerializer(serializers.ModelSerializer):
+    """
+    Serializer of Comment
+    """
+    post = PostListSerializer()
+    author = UserSerializer()
+
+    class Meta:
+        model = Comment
+        fields = ('post', 'name', 'email', 'author', 'content', 'create_at',
+                  'update_at', 'deleted')
+

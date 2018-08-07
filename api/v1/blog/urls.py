@@ -9,9 +9,12 @@ urlpatterns = [
         views.PostDetailAPIView.as_view(),
         name='post_detail'),
     # Like post
-    url(r'^posts/(?P<post_slug>[-\w]+)/like',
+    url(r'^posts/(?P<post_slug>[-\w]+)/like$',
         views.LikePostAPIView.as_view(),
         name='like_post'),
+    url(r'^posts/(?P<post_slug>[-\w]+)/comment$',
+        views.CommentAPIView.as_view(),
+        name='comment_post'),
     # Tag list API
     url(r'^tags$', views.TagsView.as_view(), name='tag_list')
 ]
