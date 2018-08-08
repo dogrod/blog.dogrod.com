@@ -9,6 +9,7 @@ from .serializers import PostListSerializer, PostSerializer, TagSerializer, Acti
 from .pagination import PostPagination
 from .forms import CommentForm
 
+
 class PostListAPIView(generics.ListAPIView):
     """
     List API View of /posts
