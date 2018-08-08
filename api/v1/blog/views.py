@@ -30,6 +30,7 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
     list_serializer_class = PostListSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+    pagination_class = PostPagination
 
     def get_serializer_class(self):
         if self.action == 'list':
