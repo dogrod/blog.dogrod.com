@@ -1,6 +1,6 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from rest_framework import generics, permissions, views, status
+from rest_framework import generics, permissions, views, status, viewsets
 from rest_framework.response import Response
 
 from taggit.models import Tag
@@ -10,14 +10,33 @@ from .pagination import PostPagination
 from .forms import CommentForm
 
 
-class PostListAPIView(generics.ListAPIView):
+class TagsView(views.APIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+
+    def get(self, request, format=None):
+        queryset = Tag.objects.all()
+        serializer = TagSerializer(queryset, many=True)
+
+        return Response({'tags': serializer.data})
+
+
+class PostViewSet(viewsets.ModelViewSet):
     """
-    List API View of /posts
+    View set of Post
     """
     queryset = Post.published.all()
-    serializer_class = PostListSerializer
-    pagination_class = PostPagination
+    serializer_class = PostSerializer
+    list_serializer_class = PostListSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            if hasattr(self, 'list_serializer_class'):
+                return self.list_serializer_class
+
+        return super(PostViewSet, self).get_serializer_class()
 
     def list(self, request):
         queryset = self.filter_queryset(self.get_queryset())
@@ -41,33 +60,19 @@ class PostListAPIView(generics.ListAPIView):
 
         return Response(serializer.data)
 
-
-class PostDetailView(generics.RetrieveAPIView):
-    """
-    View of /post/:id
-    return detail of specific post
-    """
-    queryset = Post.published.all()
-    serializer_class = PostSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
-
-    def retrieve(self, request, post_slug=None):
+    def retrieve(self, request, post_slug):
         queryset = Post.published.all()
         post = get_object_or_404(queryset, slug=post_slug)
-        serializer = PostSerializer(post)
-        return Response(serializer.data)
 
+        action_summary, created = ActionSummary.objects.get_or_create(post=post)
+        post_serializer = PostSerializer(post)
+        action_summary_serializer = ActionSummarySerializer(action_summary)
 
-class TagsView(views.APIView):
-    queryset = Tag.objects.all()
-    serializer_class = TagSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+        res = {}
+        res.update(post_serializer.data)
+        res.update(action_summary_serializer.data)
 
-    def get(self, request, format=None):
-        queryset = Tag.objects.all()
-        serializer = TagSerializer(queryset, many=True)
-
-        return Response({'tags': serializer.data})
+        return Response(res)
 
 
 class PostBasedAPIVIew(views.APIView):
@@ -83,34 +88,6 @@ class PostBasedAPIVIew(views.APIView):
     def get_summary(self, post):
         objects, created = ActionSummary.objects.get_or_create(post=post)
         return objects
-
-
-class PostDetailAPIView(PostBasedAPIVIew):
-    """
-    Retrieve a post instance.
-    """
-    permission_classes = (permissions.AllowAny, )
-    def get(self, _request, post_slug):
-        post = self.get_post(post_slug)
-        action_summary = self.get_summary(post)
-        post_serializer = PostSerializer(post)
-        action_summary_serializer = ActionSummarySerializer(action_summary)
-
-        res = {}
-        res.update(post_serializer.data)
-        res.update(action_summary_serializer.data)
-
-        return Response(res)
-
-    def put(self, request, post_slug):
-        content = request.data.get('content')
-
-        post = self.get_object(post_slug)
-        serializer = PostSerializer(post, data={'content': content}, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LikePostAPIView(PostBasedAPIVIew):

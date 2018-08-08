@@ -1,12 +1,21 @@
 from django.conf.urls import url
 from . import views
+from .views import PostViewSet
+
+post_list = PostViewSet.as_view({
+    'get': 'list'
+})
+
+post_detail = PostViewSet.as_view({
+    'get': 'retrieve'
+})
 
 urlpatterns = [
     # Post list
-    url(r'^posts$', views.PostListAPIView().as_view(), name='post_list'),
+    url(r'^posts$', post_list, name='post_list'),
     # Post detail
     url(r'^posts/(?P<post_slug>[-\w]+)$',
-        views.PostDetailAPIView.as_view(),
+        post_detail,
         name='post_detail'),
     # Like post
     url(r'^posts/(?P<post_slug>[-\w]+)/like$',
