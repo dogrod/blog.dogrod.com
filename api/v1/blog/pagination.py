@@ -15,7 +15,7 @@ class PostPagination(PageNumberPagination):
         return Response({
             'posts': data,
             'total': self.page.paginator.count,
-            'pageNumber': self.page.number,
-            'pageSize': self.get_page_size(self.request),
-            'pageCount': self.page.paginator.num_pages,
+            'page_number': self.page.number,
+            'page_size': self.get_page_size(self.request),
+            'page_count': self.page.paginator.num_pages,
         })
