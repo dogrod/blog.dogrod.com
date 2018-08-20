@@ -68,10 +68,11 @@ class PostListSerializer(serializers.ModelSerializer):
   """
     tags = TagSerializerField()
     author = UserSerializer()
+    category = CategorySerializer()
 
     class Meta:
         model = Post
-        fields = ('id', 'title', 'content', 'slug', 'author', 'publish_at', 'tags')
+        fields = ('id', 'title', 'content', 'slug', 'author', 'publish_at', 'tags', 'category', 'cover_image')
 
     def to_representation(self, data):
         representation = super(PostListSerializer, self).to_representation(data)
@@ -90,13 +91,13 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ('id', 'title', 'content', 'slug', 'author', 'publish_at',
-                  'tags', 'category')
+                  'tags', 'category', 'cover_image')
 
-    def to_representation(self, data):
-        representation = super(PostSerializer, self).to_representation(data)
-        # representation['content'] = data.get_content_as_markdown()
-        representation['category'] = data.category.title
-        return representation
+    # def to_representation(self, data):
+    #     representation = super(PostSerializer, self).to_representation(data)
+    #     # representation['content'] = data.get_content_as_markdown()
+    #     representation['category'] = data.category.title
+    #     return representation
 
 
 class ActionSummarySerializer(serializers.ModelSerializer):

@@ -46,7 +46,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
         # If there's 'tag' in request query, filter post list before response.
         if tag_in_query:
-            tag = get_object_or_404(Tag, name=tag_in_query)
+            tag = get_object_or_404(Tag, slug=tag_in_query)
             queryset = queryset.filter(tags__in=[tag])
 
         page = self.paginate_queryset(queryset)

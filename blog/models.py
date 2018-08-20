@@ -62,6 +62,7 @@ class Post(models.Model):
         max_length=10, choices=STATUS_CHOICES, default='draft')
     tags = TaggableManager(through=TaggedPost, blank=True)
     category = models.ForeignKey(Category, related_name='posts', blank=True, null=True)
+    cover_image = models.CharField(max_length=120, default='http://static.dogrod.com/media/i-am-root.png')
 
     class Meta:
         ordering = ('-publish_at', )
