@@ -2,7 +2,12 @@
 
 [Deployment Detail](/deployment)
 
+## 0.3.1(2018-08)
+* **[New]** Add cover_image to Post
+
 ## 0.3(2018-07)
+* **[Feature]** New Like API, support Like post action
+* **[Feature]** New Comment API
 * **[Change]** Make API urls more RESTful
 
 ## 0.2.2(2018-04)
