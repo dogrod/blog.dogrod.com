@@ -2,7 +2,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 
-class PostPagination(PageNumberPagination):
+class CommonListPagination(PageNumberPagination):
     """
   custom paginator of Posts Route
   """
@@ -13,7 +13,7 @@ class PostPagination(PageNumberPagination):
     def get_paginated_response(self, data):
 
         return Response({
-            'posts': data,
+            'list': data,
             'total': self.page.paginator.count,
             'page_number': self.page.number,
             'page_size': self.get_page_size(self.request),

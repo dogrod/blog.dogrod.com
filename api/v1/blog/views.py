@@ -1,12 +1,11 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from rest_framework import generics, permissions, views, status, viewsets
+from rest_framework import permissions, views, status, viewsets
 from rest_framework.response import Response
 
 from taggit.models import Tag
 from blog.models import Post, ActionSummary, Like, Comment
 from .serializers import PostListSerializer, PostSerializer, TagSerializer, ActionSummarySerializer, LikeSerializer, CommentSerializer
-from .pagination import PostPagination
 from .forms import CommentForm
 
 
@@ -30,7 +29,6 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
     list_serializer_class = PostListSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
-    pagination_class = PostPagination
 
     def get_serializer_class(self):
         if self.action == 'list':

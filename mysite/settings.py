@@ -159,7 +159,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_PAGINATION_CLASS': 'mysite.pagination.CommonListPagination',
     'PAGE_SIZE': 20,
     'DATETIME_FORMAT': '%Y-%m-%dT%H:%M:%S',
     'EXCEPTION_HANDLER': 'api.exception_handler.custom_exception_handler'
