@@ -122,10 +122,21 @@ class Comment(models.Model):
     content = models.TextField(verbose_name=u'content')
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
-    deleted = models.BooleanField(default=False)
+    approved = models.BooleanField(default=False)
+    reply_to = models.ForeignKey(
+        'self',
+        on_delete=models.CASCADE,
+        related_name='child_comment',
+        blank=True,
+        null=True
+    )
 
     class Meta:
         ordering = ('create_at', )
+
+    def approve(self):
+        self.approved = True
+        self.save()
 
     def __str__(self):
         return 'Comment by {} on {}'.format(self.name, self.post)
