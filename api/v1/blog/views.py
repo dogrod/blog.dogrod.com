@@ -134,6 +134,14 @@ class CommentAPIView(PostBasedAPIVIew):
     """
     permission_classes = (permissions.IsAuthenticated, )
 
+    def get(self, request, post_id):
+        post = self.get_post(post_id)
+
+        comments = Comment.objects.filter(post=post)
+        serializer = CommentSerializer(comments, many=True)
+
+        return Response({ 'list': serializer.data })
+
     def post(self, request, post_id):
         post = self.get_post(post_id)
 
