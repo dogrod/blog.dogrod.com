@@ -13,16 +13,6 @@ class UserSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=100)
 
 
-class CommentSerializer(serializers.ModelSerializer):
-    """
-  Serializer of comment in post
-  """
-
-    class Meta:
-        model = Comment
-        fields = ('id', 'name', 'content', 'create_at')
-
-
 class CategorySerializer(serializers.ModelSerializer):
     """
     Serializer of category in post
