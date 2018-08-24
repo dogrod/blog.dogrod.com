@@ -53,7 +53,7 @@ class TagSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tag
-        fields = ('name', 'slug')
+        fields = ('id', 'name', 'slug')
 
     def create(self, validated_data):
         tags = validated_data.pop('tags')
@@ -134,11 +134,9 @@ class CommentSerializer(serializers.ModelSerializer):
     """
     Serializer of Comment
     """
-    post = PostListSerializer()
     author = UserSerializer()
 
     class Meta:
         model = Comment
-        fields = ('post', 'name', 'email', 'author', 'content', 'create_at',
-                  'update_at', 'approved')
+        fields = ('author', 'content', 'create_at', 'approved')
 
