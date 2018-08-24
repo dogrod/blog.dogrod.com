@@ -14,14 +14,14 @@ urlpatterns = [
     # Post list
     url(r'^posts$', post_list, name='post_list'),
     # Post detail
-    url(r'^posts/(?P<post_slug>[-\w]+)$',
+    url(r'^posts/(?P<post_id>[-\w]+)$',
         post_detail,
         name='post_detail'),
     # Like post
-    url(r'^posts/(?P<post_slug>[-\w]+)/like$',
+    url(r'^posts/(?P<post_id>[-\w]+)/like$',
         views.LikePostAPIView.as_view(),
         name='like_post'),
-    url(r'^posts/(?P<post_slug>[-\w]+)/comments$',
+    url(r'^posts/(?P<post_id>[-\w]+)/comments$',
         views.CommentAPIView.as_view(),
         name='comment_post'),
     # Tag list API

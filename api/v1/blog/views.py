@@ -59,9 +59,9 @@ class PostViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data)
 
-    def retrieve(self, request, post_slug):
+    def retrieve(self, request, post_id):
         queryset = Post.published.all()
-        post = get_object_or_404(queryset, slug=post_slug)
+        post = get_object_or_404(queryset, id=post_id)
 
         action_summary, created = ActionSummary.objects.get_or_create(post=post)
         post_serializer = PostSerializer(post)
@@ -78,9 +78,9 @@ class PostBasedAPIVIew(views.APIView):
     """
     Basic API View of post to provide some method based on Post
     """
-    def get_post(self, post_slug):
+    def get_post(self, post_id):
         try:
-            return Post.objects.get(slug=post_slug)
+            return Post.objects.get(id=post_id)
         except Post.DoesNotExist:
             raise Http404
 
@@ -95,8 +95,8 @@ class LikePostAPIView(PostBasedAPIVIew):
     """
     permission_classes = (permissions.AllowAny, )
 
-    def post(self, request, post_slug):
-        post = self.get_post(post_slug)
+    def post(self, request, post_id):
+        post = self.get_post(post_id)
 
         like = Like(post=post)
         # Save author if provide
@@ -134,8 +134,8 @@ class CommentAPIView(PostBasedAPIVIew):
     """
     permission_classes = (permissions.IsAuthenticated, )
 
-    def post(self, request, post_slug):
-        post = self.get_post(post_slug)
+    def post(self, request, post_id):
+        post = self.get_post(post_id)
 
         form = CommentForm(request.POST or None)
 
