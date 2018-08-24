@@ -132,15 +132,15 @@ class CommentAPIView(PostBasedAPIVIew):
     """
     Comment API VIew
     """
-    permission_classes = (permissions.IsAuthenticated, )
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
 
-    def get(self, request, post_id):
+    def get(self, _request, post_id):
         post = self.get_post(post_id)
 
-        comments = Comment.objects.filter(post=post)
-        serializer = CommentSerializer(comments, many=True)
+        queryset = Comment.objects.filter(post=post)
+        serializer = CommentSerializer(queryset, many=True)
 
-        return Response({ 'list': serializer.data })
+        return Response({'list': serializer.data})
 
     def post(self, request, post_id):
         post = self.get_post(post_id)
