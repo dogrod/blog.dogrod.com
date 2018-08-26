@@ -132,7 +132,7 @@ class Comment(models.Model):
     )
 
     class Meta:
-        ordering = ('create_at', )
+        ordering = ('-create_at', )
 
     def approve(self):
         self.approved = True
