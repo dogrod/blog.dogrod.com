@@ -145,7 +145,7 @@ class CommentAPIView(PostBasedAPIVIew):
     def post(self, request, post_id):
         post = self.get_post(post_id)
 
-        form = CommentForm(request.POST or None)
+        form = CommentForm(request.data or None)
 
         if not form.is_valid():
             return Response({
