@@ -2,8 +2,13 @@
 
 [Deployment Detail](/deployment)
 
+## 0.3.2(2018-08)
+
+* **[Feature]** Comment@Blog related changes
+* **[Fix]** Output local time in API response
+
 ## 0.3.1(2018-08)
-* **[New]** Add cover_image to Post
+* **[Feature]** Add cover_image to Post
 
 ## 0.3(2018-07)
 * **[Feature]** New Like API, support Like post action
