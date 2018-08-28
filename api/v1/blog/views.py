@@ -137,7 +137,7 @@ class CommentAPIView(PostBasedAPIVIew):
     def get(self, _request, post_id):
         post = self.get_post(post_id)
 
-        queryset = Comment.objects.filter(post=post)
+        queryset = Comment.objects.filter(post=post, approved=True)
         serializer = CommentSerializer(queryset, many=True)
 
         return Response({'list': serializer.data})
