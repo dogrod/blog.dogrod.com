@@ -3,12 +3,14 @@ from rest_framework import serializers
 from taggit.models import Tag
 from blog.models import Post, Comment, Category, ActionSummary, Like
 
+
 # https://stackoverflow.com/questions/17331578/django-rest-framework-timezone-aware-renderers-parsers
 class DateTimeTzAwareField(serializers.DateTimeField):
     def to_representation(self, value):
         if value:
             value = timezone.localtime(value)
         return super(DateTimeTzAwareField, self).to_representation(value)
+
 
 # Define serializer for comment in post
 class UserSerializer(serializers.Serializer):

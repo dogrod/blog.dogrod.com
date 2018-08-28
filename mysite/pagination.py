@@ -15,7 +15,7 @@ class CommonListPagination(PageNumberPagination):
         return Response({
             'list': data,
             'total': self.page.paginator.count,
-            'page_number': self.page.number,
+            'page': self.page.number,
             'page_size': self.get_page_size(self.request),
             'page_count': self.page.paginator.num_pages,
         })
