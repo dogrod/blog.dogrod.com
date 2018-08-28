@@ -122,7 +122,7 @@ class Comment(models.Model):
     content = models.TextField(verbose_name=u'content')
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
-    approved = models.BooleanField(default=False)
+    approved = models.BooleanField(default=True)
     reply_to = models.ForeignKey(
         'self',
         on_delete=models.CASCADE,
@@ -133,6 +133,10 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ('-create_at', )
+
+    def ban_comment(self):
+        self.approved = False
+        self.save()
 
     def approve(self):
         self.approved = True
