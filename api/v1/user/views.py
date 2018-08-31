@@ -1,5 +1,4 @@
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 
 from rest_framework.status import HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
@@ -9,6 +8,7 @@ from rest_framework_jwt.settings import api_settings
 
 from user.models import Profile
 from .serializers import UserProfileSerializer
+from .forms import CustomUserCreationForm
 
 
 class UserProfileView(APIView):
@@ -25,7 +25,7 @@ class UserProfileView(APIView):
         })
 
     def post(self, request):
-        form = UserCreationForm(request.data)
+        form = CustomUserCreationForm(request.data)
 
         if not form.is_valid():
             return Response({
