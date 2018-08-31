@@ -149,7 +149,7 @@ class CommentAPIView(PostBasedAPIVIew):
 
         if not form.is_valid():
             return Response({
-                'status': '-1',
+                'success': False,
                 'reason': form.errors,
             }, status=status.HTTP_400_BAD_REQUEST)
 
