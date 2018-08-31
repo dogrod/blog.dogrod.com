@@ -30,8 +30,6 @@ def post_list(request, tag_slug=None):
         # If page is out of range deliver last page of results
         posts = paginator.page(paginator.num_pages)
 
-    print(posts)
-
     return render(request, 'post/list.html', {
         'page': page,
         'posts': posts,
@@ -67,7 +65,6 @@ def post_detail(request, year, month, day, slug):
     else:
         comment_form = CommentForm()
 
-    print(post.id)
     return render(
         request, 'post/detail.html', {
             'post': post,
