@@ -33,8 +33,6 @@ class CustomUserCreationForm(UserCreationForm):
             code='email_exists',
         )
 
-
-
     # def clean(self):
     #     if self.cleaned_data.get('email') is None:
     #         self.add_error('validate_email', 'Email不能为空！')

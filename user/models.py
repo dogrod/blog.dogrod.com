@@ -23,3 +23,11 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+
+def get_profile(self):
+    profile = Profile.objects.get(user=self)
+    return profile
+
+
+User.add_to_class('get_profile', get_profile)

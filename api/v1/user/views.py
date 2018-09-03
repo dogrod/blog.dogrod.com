@@ -44,6 +44,8 @@ class UserProfileView(APIView):
         payload = jwt_payload_handler(user)
         token = jwt_encode_handler(payload)
 
+        profile = user.get_profile()
+
         return  Response({
             'success': True,
             'token': token,
@@ -52,6 +54,7 @@ class UserProfileView(APIView):
                 'username': user.username,
                 'email': user.email,
                 'active': user.is_active,
-                'staff': user.is_staff
+                'staff': user.is_staff,
+                'nick_name': profile.nick_name,
             }
         })
