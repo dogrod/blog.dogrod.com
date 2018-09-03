@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^blog/', include('blog.api.urls', namespace='blog_api')),
     url(r'^account/', include('account.api.urls', namespace='user_api')),
-    url(r'^api/', include('api.urls', namespace='api'))
+    url(r'^api', include('api.urls', namespace='api'))
     # url(r'^api/account/', include('account.api.urls', namespace = 'account_api'))
 ] + static(
     settings.STATIC_URL, document_root=settings.STATIC_ROOT)
