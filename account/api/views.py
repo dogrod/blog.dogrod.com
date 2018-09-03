@@ -9,7 +9,7 @@ def jwt_response_payload_handler(token, user, request, *args, **kwargs):
             'email': user.email,
             'active': user.is_active,
             'staff': user.is_staff,
-            'nickname': profile.nick_name,
+            'nick_name': profile.nick_name,
         }
     }
     return data
