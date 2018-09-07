@@ -44,7 +44,7 @@ class TagSerializerField(serializers.ListField):
     child = serializers.CharField()
 
     def to_representation(self, data):
-        tags = data.values('id', 'name')
+        tags = data.values('id', 'name', 'slug')
         return tags
 
 
