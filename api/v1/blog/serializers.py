@@ -45,7 +45,6 @@ class TagSerializerField(serializers.ListField):
 
     def to_representation(self, data):
         tags = data.values('id', 'name')
-        print(tags)
         return tags
 
 
