@@ -2,6 +2,7 @@ from django.utils import timezone
 from rest_framework import serializers
 from taggit.models import Tag
 from blog.models import Post, Comment, Category, ActionSummary, Like
+from django.contrib.auth.models import User
 
 
 # https://stackoverflow.com/questions/17331578/django-rest-framework-timezone-aware-renderers-parsers
@@ -13,12 +14,16 @@ class DateTimeTzAwareField(serializers.DateTimeField):
 
 
 # Define serializer for comment in post
-class UserSerializer(serializers.Serializer):
+class UserSerializer(serializers.ModelSerializer):
     """
   Serializer of Django's default user
   """
     email = serializers.EmailField()
     username = serializers.CharField(max_length=100)
+
+    class Meta:
+        model = User
+        fields = ('email', 'username', 'id')
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -39,7 +44,9 @@ class TagSerializerField(serializers.ListField):
     child = serializers.CharField()
 
     def to_representation(self, data):
-        return data.values_list('name', flat=True)
+        tags = data.values('id', 'name')
+        print(tags)
+        return tags
 
 
 class TagSerializer(serializers.ModelSerializer):
