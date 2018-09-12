@@ -2,6 +2,12 @@
 
 [Deployment Detail](/deployment)
 
+## 0.4(2018-09)
+
+* **[Feature]** UserProfile
+* **[Feature]** Sign up API
+* **[Other]** Other optimization & bug fix  
+
 ## 0.3.2(2018-08)
 
 * **[Feature]** Comment@Blog related changes
