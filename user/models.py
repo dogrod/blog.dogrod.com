@@ -26,7 +26,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 def get_profile(self):
-    profile = Profile.objects.get_or_create(user=self)
+    profile, created = Profile.objects.get_or_create(user=self)
     return profile
 
 
