@@ -32,9 +32,9 @@ class PostAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'post', 'create_at', 'approved')
+    list_display = ('id', 'post', 'content', 'name', 'author', 'create_at', 'approved')
     list_filter = ('approved', 'create_at', 'update_at')
-    search_fields = ('name', 'email', 'content')
+    search_fields = ('post', 'content')
 
 
 class CategoryAdmin(admin.ModelAdmin):
