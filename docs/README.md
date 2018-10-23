@@ -1,5 +1,7 @@
 # Backend of *.dogrod.com
 
+[![Build Status](http://jenkins.dogrod.xyz/buildStatus/icon?job=prod-backend-website)](http://jenkins.dogrod.xyz/job/prod-backend-website/)
+
 > A Django APP
 
 ## Feature
