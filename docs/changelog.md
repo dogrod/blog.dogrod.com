@@ -2,6 +2,11 @@
 
 [Deployment Detail](/deployment)
 
+## 0.4.1(2018-10)
+
+* **[Change]** Use Chinese as default language for admin
+* **[Change]** Change admin display of Comment
+
 ## 0.4(2018-09)
 
 * **[Feature]** UserProfile
