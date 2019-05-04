@@ -108,6 +108,8 @@ postgres_config = config['POSTGRES']
 DB_NAME = postgres_config['DB_NAME']
 DB_USER = postgres_config['DB_USER']
 DB_PASSWORD = postgres_config['DB_PASSWORD']
+DB_HOST = postgres_config['HOST']
+DB_PORT = postgres_config['PORT']
 
 DATABASES = {
     'default': {
@@ -115,8 +117,8 @@ DATABASES = {
         'NAME': DB_NAME,
         'USER': DB_USER,
         'PASSWORD': DB_PASSWORD,
-        'HOST': 'db',
-        'PORT': 5432
+        'HOST': DB_HOST,
+        'PORT': DB_PORT
     }
 }
 
