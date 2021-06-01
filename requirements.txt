@@ -18,7 +18,7 @@ requests==2.18.4
 six==1.11.0
 django-taggit==0.22.1
 unidecode==0.4.21
-urllib3==1.22
+urllib3==1.26.5
 upyun==2.5.1
 uWSGI==2.0.15 
 wrapt==1.10.11
